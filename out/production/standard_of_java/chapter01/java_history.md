@@ -29,8 +29,10 @@ JDK(Java Development Kit) = JRE + 개발도구
 
 내 pc -> 시스템속성 -> 고급시스템설정 -> 고급 -> 환경변수 -> Path 변수 -> 새 변수 생성    
 변수이름 JAVA_HOME  
-변수값 C:\Program Files\Java\jdk-11.0.12\bin; 추가
-
-![Alt text](/chapter01/JAVA_HOME.PNG)
-<img src="/chapter01/JAVA_HOME.png" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
+변수값 C:\Program Files\Java\jdk-11.0.12\bin; 추가   
 cmd -> java -version 으로 자바 버전 확인
+    
+
+<img src="https://github.com/shinebb/standard_of_java/assets/94883716/589df907-11fd-4a7d-ae08-881245505dd6" width="60%" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
+
+
