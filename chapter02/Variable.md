@@ -56,6 +56,22 @@ double pi = 3.14; //double 실수 타입
 숫자 - 실수 - float, double  
 논리 - boolean(true, false)  
 
+상수와 리터럴
+--------------
+*****
+
+* 상수(constant)
+: 한 번만 값을 저장 가능한 변수  
+int score = 100; //정수형 변수  
+    score = 200; //가능    
+final int MAX = 100;  //MAX는 상수    
+          MAX = 200;  //에러
+
+* 리터럴(literal)
+: 그 자체로 값을 의미하는 것   
+ex) score -> 변수  
+MAX -> 상수  
+100 -> 리터럴
 
 인텔리제이 단축키
 --------------
