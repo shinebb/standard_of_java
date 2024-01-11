@@ -155,25 +155,6 @@ x = y;   //x의 값을 y에 저장
 y = tmp; //tmp의 값을 y에 저장  
 
 
-기본형과 참조형
--------------------
-*****
-
-* 값의 타입(기본형(Primitive type)-8개)
-: =>실제 값을 저장  
-문자 : char  
-정수 : byte, short, int, long  
-실수 : float, double  
-논리 : boolean   
-
-
-* 값의 타입(참조형(Reference type)-무한개)
-: => 메모리 주소를 저장(4byte 또는 8byte)  
-기본형을 제외한 나머지(String, System 등)    
-Date today;  //참조형 변수 today를 선언  
-today = new Date(); //객체를 생성하고 today에 객체의 주소를 저장  
-//만약 생성된 객체의 주소가 100번지라면 today에는 100이 저장된다.
-
 인텔리제이 단축키
 --------------
 *****
