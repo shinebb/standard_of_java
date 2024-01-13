@@ -155,6 +155,156 @@ x = y;   //x의 값을 y에 저장
 y = tmp; //tmp의 값을 y에 저장  
 
 
+기본형과 참조형
+-------------------
+*****
+
+* 값의 타입(기본형(Primitive type)-8개)
+: =>실제 값을 저장  
+문자 : char  
+정수 : byte, short, int, long  
+실수 : float, double  
+논리 : boolean   
+
+
+* 값의 타입(참조형(Reference type)-무한개)
+: => 메모리 주소를 저장(4byte 또는 8byte)  
+기본형을 제외한 나머지(String, System 등)    
+Date today;  //참조형 변수 today를 선언  
+today = new Date(); //객체를 생성하고 today에 객체의 주소를 저장  
+//만약 생성된 객체의 주소가 100번지라면 today에는 100이 저장된다.
+
+기본형(Primitive type)
+----------------------
+*****
+
+* 종류와 크기
+: 
+ 논리형  
+* boolean : true와 false 중 하나를 값으로 갖으며, 조건식과 논리적 계산에 사용된다.  
+문자형   
+* char : 문자를 저장하는데 사용되며, 변수 당 하나의 문자만을 저장할 수 있다.  
+정수형 : 정수 값을 저장하는데 사용된다.    
+* int : 주로 사용된다. (default)
+* long : 아주 큰 정수일 때 사용된다.  
+* byte : 이진 데이터를 다루는데 사용된다.  
+* short : c언어와의 호환을 위해 사용되지만 잘 사용되지 않는다.  
+실수형 : 소수점을 가진 실수 값을 저장하는데 사용된다.  
+* float : 실수 값을 저장한다.
+* double : 실수 값을 저장한다. (default)
+
+1bit = 2진수 1자리  
+1byte = 8bit
+
+-----
+- boolean = 1byte 
+-----
+- char = 2byte(유니코드)  
+- -----
+- byte = 1byte    
+- short = 2byte  
+- **int = 4byte**  
+- **long = 8byte** 
+- -----
+- **float = 4byte**  
+- **double = 8byte**  
+- -----
+
+
+기본형(Primitive type) - 표현범위
+----------------------
+*****
+
+* byte
+: byte b;  
+d = 3;  
+: 
+byte = 1byte = 8bit = 2진수(0,1로만 이루어짐)  
+b [][][][][][][][]  
+b [0][0][0][0][0][0][1][1]  
+3(10)=11(2)
+: 
+1bit [] -> 1,0 -> 2개 => 2의1승  
+2bti [][] -> 00,01,10,11 -> 4개 => 2의2승    
+* n비트를 표현할 수 있는 값의 개수 : 2의 n승개 => 256  
+* n비트를 표현할 수 있는 부호없는 정수의 범위 : 0 ~ 2의n승의 -1 => 0~255(0부터 시작하기 때문에 256이 아닌 255)  
+* n비트를 표현할 수 있는 부호있는 정수의 범위 : -2의n-1승 ~ 2의2-1승의 -1 => -128~127  
+* (양수와 음수 모두 표현해야하기 때문에 범위의 절반을 음수로 사용한다.) 
+*   
+* 자바에서 정수형은 모두 부호가 있다.
+* [S] -> 부호비트(Sign bit) -> 0=양수 / 1=음수
+
+* byte
+: ![수식](https://latex.codecogs.com/svg.latex?-2%5E7) ~ ![수식](https://latex.codecogs.com/svg.latex?2%5E7-1)  
+[S][7bit]  
+* [0][7bit]  
+* [1][7bit]
+: 
+크기 : 1byte(4bit)  
+범위 : -128~127 => 128+128 => 총 256개(2의 8승의 값을 표현할 수 있다.)
+
+* short
+  : ![수식](https://latex.codecogs.com/svg.latex?-2%5E{15}) ~ ![수식](https://latex.codecogs.com/svg.latex?2%5E{15}-1)  
+  [S][15bit]  
+  * [0][15bit]  
+  * [1][15bit]  
+: 
+크기 : 2byte(16bit)  
+범위 : -32768~32768
+
+* char
+: 0 ~ ![수식](https://latex.codecogs.com/svg.latex?2%5E{16}-1)
+[16bit]
+* [0][16bit]
+: 
+크기 : 2byte(16bit)  
+범위 : 0~65535
+
+<br>
+
+#### * short = 부호있는 정수의 범위 : ![수식](https://latex.codecogs.com/svg.latex?-2^{n-1}) ~ ![수식](https://latex.codecogs.com/svg.latex?2^{n-1}-1)
+#### * char = 부호없는 정수의 범위 : 0 ~ ![수식](https://latex.codecogs.com/svg.latex?2%5En-1)  
+#### * => 똑같은 2byte여도 범위가 다르다.
+  
+* int
+: ![수식](https://latex.codecogs.com/svg.latex?-2%5E{31}) ~ ![수식](https://latex.codecogs.com/svg.latex?2%5E{31}-1)  
+[S][31bit]
+* [0][31bit]  
+* [1][31bit]
+: 
+크기 : 4byte(32bit)  
+범위 : -20억~20억
+
+* long
+: ![수식](https://latex.codecogs.com/svg.latex?-2%5E{63}) ~ ![수식](https://latex.codecogs.com/svg.latex?2%5E{63}-1)  
+[S][63bit]
+* [0][63bit]  
+* [1][63bit]  
+: 
+크기 : 8byte(64bit)  
+범위 : -800경~800경 < BigInteger(클래스사용)
+
+* float
+: [양수]1.4E-45 ~ 3.4E38  
+[전체]-3.4x10E38 ~ 3.4x10E38  
+* 중간 -1.4x10E-45 ~ 1.4x10E-45 => 표현할 수 없는 범위  
+[S][E(8)][M(23)]  
+E=지수=3.4  
+M=가수=E38  
+정밀도(가수에서 오차없는 자리수) : 7자리  
+: 
+크기 : 4byte(32bit)
+
+* double(default)
+  : [양수]4.9E-324 ~ 1.8E308  
+  [S][E(11)][M(52)]  
+  E=지수=3.4  
+  M=가수=E38  
+  정밀도(가수에서 오차없는 자리수) : 15자리  
+  :   
+  크기 : 8byte(64bit)  
+
+
 인텔리제이 단축키
 --------------
 *****

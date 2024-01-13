@@ -239,24 +239,70 @@ b [0][0][0][0][0][0][1][1]
 [S][7bit]  
 * [0][7bit]  
 * [1][7bit]
-*   
-*  
-범위 : -128~127 => 128+128 => 총 256개(2의 8승의 값을 표현할 수 있다.
+: 
+크기 : 1byte(4bit)  
+범위 : -128~127 => 128+128 => 총 256개(2의 8승의 값을 표현할 수 있다.)
 
 * short
   : ![수식](https://latex.codecogs.com/svg.latex?-2%5E{15}) ~ ![수식](https://latex.codecogs.com/svg.latex?2%5E{15}-1)  
   [S][15bit]  
   * [0][15bit]  
   * [1][15bit]  
--32768~32768 => 
+: 
+크기 : 2byte(16bit)  
+범위 : -32768~32768
 
+* char
+: 0 ~ ![수식](https://latex.codecogs.com/svg.latex?2%5E{16}-1)
+[16bit]
+* [0][16bit]
+: 
+크기 : 2byte(16bit)  
+범위 : 0~65535
 
-![수식](https://latex.codecogs.com/svg.latex?x%5E2)  
-![수식](https://latex.codecogs.com/svg.latex?2%5En)  
-![수식](https://latex.codecogs.com/svg.latex?2%5E7)  
-![수식](https://latex.codecogs.com/svg.latex?2%5E{15})   
-![수식](https://latex.codecogs.com/svg.latex?-2%5E7)  
-![수식](https://latex.codecogs.com/svg.latex?-2%5E{15})
+<br>
+
+#### * short = 부호있는 정수의 범위 : ![수식](https://latex.codecogs.com/svg.latex?-2^{n-1}) ~ ![수식](https://latex.codecogs.com/svg.latex?2^{n-1}-1)
+#### * char = 부호없는 정수의 범위 : 0 ~ ![수식](https://latex.codecogs.com/svg.latex?2%5En-1)  
+#### * => 똑같은 2byte여도 범위가 다르다.
+  
+* int
+: ![수식](https://latex.codecogs.com/svg.latex?-2%5E{31}) ~ ![수식](https://latex.codecogs.com/svg.latex?2%5E{31}-1)  
+[S][31bit]
+* [0][31bit]  
+* [1][31bit]
+: 
+크기 : 4byte(32bit)  
+범위 : -20억~20억
+
+* long
+: ![수식](https://latex.codecogs.com/svg.latex?-2%5E{63}) ~ ![수식](https://latex.codecogs.com/svg.latex?2%5E{63}-1)  
+[S][63bit]
+* [0][63bit]  
+* [1][63bit]  
+: 
+크기 : 8byte(64bit)  
+범위 : -800경~800경 < BigInteger(클래스사용)
+
+* float
+: [양수]1.4E-45 ~ 3.4E38  
+[전체]-3.4x10E38 ~ 3.4x10E38  
+* 중간 -1.4x10E-45 ~ 1.4x10E-45 => 표현할 수 없는 범위  
+[S][E(8)][M(23)]  
+E=지수=3.4  
+M=가수=E38  
+정밀도(가수에서 오차없는 자리수) : 7자리  
+: 
+크기 : 4byte(32bit)
+
+* double(default)
+  : [양수]4.9E-324 ~ 1.8E308  
+  [S][E(11)][M(52)]  
+  E=지수=3.4  
+  M=가수=E38  
+  정밀도(가수에서 오차없는 자리수) : 15자리  
+  :   
+  크기 : 8byte(64bit)  
 
 
 인텔리제이 단축키
