@@ -210,6 +210,55 @@ today = new Date(); //객체를 생성하고 today에 객체의 주소를 저장
 - **double = 8byte**  
 - -----
 
+
+기본형(Primitive type) - 표현범위
+----------------------
+*****
+
+* byte
+: byte b;  
+d = 3;  
+: 
+byte = 1byte = 8bit = 2진수(0,1로만 이루어짐)  
+b [][][][][][][][]  
+b [0][0][0][0][0][0][1][1]  
+3(10)=11(2)
+: 
+1bit [] -> 1,0 -> 2개 => 2의1승  
+2bti [][] -> 00,01,10,11 -> 4개 => 2의2승    
+* n비트를 표현할 수 있는 값의 개수 : 2의 n승개 => 256  
+* n비트를 표현할 수 있는 부호없는 정수의 범위 : 0 ~ 2의n승의 -1 => 0~255(0부터 시작하기 때문에 256이 아닌 255)  
+* n비트를 표현할 수 있는 부호있는 정수의 범위 : -2의n-1승 ~ 2의2-1승의 -1 => -128~127  
+* (양수와 음수 모두 표현해야하기 때문에 범위의 절반을 음수로 사용한다.) 
+*   
+* 자바에서 정수형은 모두 부호가 있다.
+* [S] -> 부호비트(Sign bit) -> 0=양수 / 1=음수
+
+* byte
+: ![수식](https://latex.codecogs.com/svg.latex?-2%5E7) ~ ![수식](https://latex.codecogs.com/svg.latex?2%5E7-1)  
+[S][7bit]  
+* [0][7bit]  
+* [1][7bit]
+*   
+*  
+범위 : -128~127 => 128+128 => 총 256개(2의 8승의 값을 표현할 수 있다.
+
+* short
+  : ![수식](https://latex.codecogs.com/svg.latex?-2%5E{15}) ~ ![수식](https://latex.codecogs.com/svg.latex?2%5E{15}-1)  
+  [S][15bit]  
+  * [0][15bit]  
+  * [1][15bit]  
+-32768~32768 => 
+
+
+![수식](https://latex.codecogs.com/svg.latex?x%5E2)  
+![수식](https://latex.codecogs.com/svg.latex?2%5En)  
+![수식](https://latex.codecogs.com/svg.latex?2%5E7)  
+![수식](https://latex.codecogs.com/svg.latex?2%5E{15})   
+![수식](https://latex.codecogs.com/svg.latex?-2%5E7)  
+![수식](https://latex.codecogs.com/svg.latex?-2%5E{15})
+
+
 인텔리제이 단축키
 --------------
 *****
