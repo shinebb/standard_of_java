@@ -50,12 +50,20 @@ System.out.printf("age:%d year:%d\n", 14, 2017); //age:14 yaer:2017
    System.out.printf("%e", f); //1.234568e+02  =지수형식(e+02 = 10의 2승)(마지막 반올림)  
    System.out.printf("%g", 123.456789); //123.457  =간략한 형식(소수점포함 7자리/마지막 반올림)  
    System.out.printf("%g", 0.00000001); //1.00000e-8  =간략한 형식(지수형태로 나타내는게 더 간략하게 판단되면 지수형태로 나타냄)    
+<br>  
+4. 지시자 옵션
 
+System.out.printf("[%5d]", 10);  //[   10] => 5자리까지 출력  
+System.out.printf("[%-5d]", 10);  //[10   ] => 5자리까지 출력(-왼쪽정렬)  
+System.out.printf("[%05d]", 10);  //[00010] => 빈자리 0으로 채움  
 
-System.out.printf("[%5d]", 10);  //[   10] => 5자리까지 출력
-System.out.printf("[%-5d]", 10);  //[10   ] => 5자리까지 출력(-왼쪽정렬)
-System.out.printf("[%05d]", 10);  //[00010] => 빈자리 0으로 채움
+double d = 1.23456789;  
+System.out.printf("%f%n", d);  //1.234568  
+System.out.printf("d=%14.10f%n", d);  //d=  1.2345678900 => 전체 14자리 중 소수점 아래 10자리  
+System.out.printf("d=%14.6f%n", d);  //d=      1.234568 => 전체 14자리 중 소수점 아래 6자리  
+System.out.printf("d=%.6f%n", d);  //d=1.234568 => 전체생략가능/소수점 아래 6자리  
 
-System.out.printf("d=%14.10f%n", d);  //[전체 14자리 중 소수점 아래 10자리
-
-System.out.printf("[%s]%n", url); 
+System.out.printf("[%s]%n", "www.codechobo.com"); //[www.codechobo.com]  
+System.out.printf("[%20s]%n", "www.codechobo.com"); //[   www.codechobo.com] => 전체 20자리  
+System.out.printf("[%-20s]%n", "www.codechobo.com"); //[www.codechobo.com   ]  => 전체 20자리 + 왼쪽정렬  
+System.out.printf("[%.10s]%n", "www.codechobo.com"); //[www.codech] => 10자리 자르기  
