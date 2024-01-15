@@ -22,4 +22,13 @@ Scanner를 사용하려면?
 * nextFloat() //실수
 * String input = scanner.nextLine();  //화면에서 입력받은 내용(줄 단위/한 행)을 input에 저장
 * int num = Integer.parseInt(input);  //문자열(input)을 숫자(num)로 변환
-* 
+
+
+오버플로우
+---------
+*****
+
+* 오버플로우 : 표현가능한 범위를 넘는것  
+최대값 +1 => 최소값(1111 => 0000)  
+최소값 -1 => 최대값  
+
