@@ -1,7 +1,7 @@
 Operator (연산자)
 =========================
 
-연잔자와 피연산자
+연산자와 피연산자
 ---------
 *****
 
@@ -85,3 +85,63 @@ ex)
 int i = -10;  
 i = -1;  
 System.out.println(i); //10  
+
+
+형변환연산자
+-------------
+*****
+
+* 형변환이란?
+: 변수 또는 상수의 타입을 다른 타입으로 변환하는 것  
+"(타입)피연산자"
+
+double d = 85.4;  
+int score = (int)d;  
+int score = (int)85.4;  
+int score = 85;  
+  
+char 유니코드로 정수변환 가능  
+실수에서 정수 변환시 반올림되지않는다.
+
+* int -> char 
+: (char)65 -> 'A'  
+
+* char -> int
+: (int)'A' -> 64
+
+* float -> int
+: (int)1.6f -> 1
+
+* int -> float
+: (float)10 -> 10.0f
+
+
+자동형변환 
+------------------
+*****
+
+"기존의 값을 최대한 보존할 수 있는 타입으로 자동 형변환된다."  
+작은타입에서 -> 큰타입으로  
+byte -> short -> int -> long -> float -> double  
+char -> int
+
+long(8byte) -> float(4byte) float가 작지만 실제표현할수있는 값의 범위는 실수형이 크기때문에 가능하다.
+
+float f = 1234;  //int타입의 값을 float타입의 변수에 저장  
+int i = 3.14f;   //error -> float보다 int가 저 작기때문에 값 손실 발생이 일어날 수 있어 자동형변환이안된다.  
+int i = (int)3.14f;  //가능  
+
+
+byte b = 10;  
+int i = b;  //자동형변환 가능  
+int i2 = 300;  
+byte b2 = (byte)i2;  //자동형변환 불가로 (타입)으로 수동형변환  
+<br>  
+
+byte b = 100;  //ok  100=리터럴=상수
+int i = 100;  
+byte b = i;  //에러  i=변수
+byte b = (byte)i;  //ok. 수동형변환 필요  
+  
+byte b = 1000;  //에러. byte타입의 범위(-128~127)  
+byte b  = (byte)1000;  //ok. 그러나 값 손실이 발생해서 변수 b에는 -24가 저장됨.
