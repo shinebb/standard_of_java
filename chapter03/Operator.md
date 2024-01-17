@@ -144,4 +144,28 @@ byte b = i;  //에러  i=변수
 byte b = (byte)i;  //ok. 수동형변환 필요  
   
 byte b = 1000;  //에러. byte타입의 범위(-128~127)  
-byte b  = (byte)1000;  //ok. 그러나 값 손실이 발생해서 변수 b에는 -24가 저장됨.
+byte b  = (byte)1000;  //ok. 그러나 값 손실이 발생해서 변수 b에는 -24가 저장됨.  
+  
+
+산술변환
+------------
+*****
+
+"연산 전에 피연산자의 타입을 일치시키는 것"  
+1. 두 피연산자의 타입을 같게 일치시킨다.(보다 큰 타입으로 일치 : 값손실을 최소화하기 위해)  
+long + int -> long + long -> long  
+float + int -> float + float -> float  
+double + float -> double + double -> double  
+<br>  
+
+2. 피연산자의 타입이 int보다 작은 타입이면 int로 변환된다.  
+byte + short -> int + int -> int  
+char + short -> int + int -> int    
+ex) char 2 - char 0 -> int 50(유니코드) -> int 48(유니코드) -> 2 
+
+
+
+
+
+
+
