@@ -199,8 +199,10 @@ String str1 = new String("abc");
 String str2 = new String("abc");  
 
 System.out.println(str1==str2);   //false  
-System.out.println(str1.equals(str2)); //true  
-
+System.out.println(str1.equals(str2)); //true    
+  
+* 참고    
+: str.equalsIgnoreCase("yes") : 문자열 str의 내용이 "yes"일 때(대소문자 구문안함)
 
 
 논리연산자
