@@ -99,3 +99,17 @@ or
 //배열 iArr의 모든 요소를 출력한다. [100, 95, 80, 70, 60] 이 출력 된다.
 System.out.println(Array.toString(iArr));
 
+
+String 배열의 선언과 생성
+-----------------------
+*****
+
+String[] name = new String[3]; //3개의 문자열을 담을 수 있는 배열을 생성한다.  
+(참조형 기본값 = null)  
+
+name[0] = "Kim";  
+name[1] = "Park";  
+name[2] = "Yi";  
+or  
+String[] name = {"Kim", "Park", "Yi"};  
+
