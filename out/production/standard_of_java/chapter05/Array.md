@@ -119,4 +119,78 @@ String[] name = {"Kim", "Park", "Yi"};
 ----------------
 *****
 "커맨드 라인에 입력한 값이 문자열 배열에 담겨서 전달된다."
+ 
+intelliJ 커맨드창 사용법    
+> Edit Configurations > Application 추가  
+> Main Class 에 패키지.클래스 네임 입력(chapter05.Ex_commend)  
+> 아래 Program arguments에 원하는 값 입력
+
+
+*****Window 커맨트창 사용법  
+기존방법 :  
+> 해당 클래스 폴더 위치 확인(.java가 아닌 .class파일)(D:\devMusign\standard_of_java\out\production\standard_of_java\chapter05) 복사  
+> Window cmd 창 오픈 > cd 경로 (해당경로 이동) > java Ex_commend abc 1234 "Hello" 입력하면 실행됨
+
+본인 방법 :
+> 해당 클래스 폴더 위치 확인(.java가 아닌 .class파일)(D:\devMusign\standard_of_java\out\production\standard_of_java) 복사  
+> (chapter05 패키지를 포함한 이전 경로에서 실행 가능)   
+> D드라이브로 이동이 안돼서 "cd /d D:\" 로 다른 드라이브 이동후 다시 D드라이브 이동    
+> Window cmd 창 오픈 > cd 경로 (해당경로 이동) > java chapter05.Ex_commend abc 1234 "Hello" 패키지명까지 입력하면 실행됨.
+
+
+2차원 배열
+--------------
+*****
+"테이블 형태의 데이터를 저장하기 위한 배열"  
+
+int[][] score = new int[4][3]; //4행 3열의 2차원 배열을 생성한다. int값 12개 = 저장공간 12개
+
+열 index(0 ~ 열의길이-1)
+행 index(0 ~ 행의길이-1)
+
+score[0][0] score[0][1] score[0][2]  
+score[1][0] score[1][1] score[1][2]  
+score[2][0] score[2][1] score[2][2]  
+score[3][0] score[3][1] score[3][2]  
+
+score[0][0] = 100;  //배열 score의 1행 1열에 100을 저장  
+System.out.println(score[0][0]);  //배열 score의 1행 1열의 값을 출력 -> 100  
+
+
+2차원 배열의 초기화
+---------------
+*****
+
+int[][] arr = {{1,2,3}, {4,5,6}};   
+int[][] score = {
+* {100, 100, 100} -> 이것 하나가 1차원 
+* {20, 20, 20}
+* {30, 30, 30}
+* {40, 40, 40}  
+
+} 
+=> 1차원 배열의 배열이라고도 표현한다.
+
+score -> score[0] -> score[0][0] score[0][1] score[0][2] => 이것 한 줄 이 1차원배열 이름은 score[0]  
+score -> score[1] -> score[1][0] score[1][1] score[1][2] => 이것 한 줄 이 1차원배열 이름은 score[1]  
+score -> score[2] -> score[2][0] score[2][1] score[2][2] => 이것 한 줄 이 1차원배열 이름은 score[2]  
+score -> score[3] -> score[3][0] score[3][1] score[3][2] => 이것 한 줄 이 1차원배열 이름은 score[3]  
+
+score.length == 4
+score[0].length == 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
