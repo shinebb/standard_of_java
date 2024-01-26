@@ -107,5 +107,27 @@ System.out.println("현재 채널은 " + t.channel + " 입니다.");
 (불필요하게 메모리를 낭비하는일이 없도록 해준다.)  
 
 
+  
+객체 배열
+--------------
+*****
+
+객체 배열 == 참조변수 배열  
+Tv tv1, tv2, tv3  
+=>   
+Tv[] tvArr = new Tv[3]; //길이가 3인 Tv타입의 참조변수 배열
+//tvArr[0][1][2]는 현재 null  
+//(참조변수배열만 선언하면 null값이 들어가므로 하나씩 객체를 넣어줘야한다.)   
+
+//객체를 생성해서 배열의 각 요소에 저장    
+TvArr[0] = new Tv();  
+TvArr[1] = new Tv();  
+TvArr[2] = new Tv();  
+=>  
+Tv[] tvArr = { new Tv(), new Tv(), new Tv() };  
+
+
+
+
 
 
