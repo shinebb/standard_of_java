@@ -13,18 +13,16 @@
 //그러나 메서드 = 함수 같은 역할  
 
 
-반환타입 메서드이름(타입 변수명, 타입 변수명, ...){ //선언부
-- 메서드 호출시 수행 될 코드 //구현부
-
-}
+    반환타입 메서드이름(타입 변수명, 타입 변수명, ...){ //선언부
+        메서드 호출시 수행 될 코드 //구현부
+    }
 
 => 
 
-int add(int x, int y) {   
-* int result = x + y;  
-* return result; //결과를 반환
-
-}  
+    int add(int x, int y) {   
+        int result = x + y;  
+        return result; //결과를 반환
+    }  
   
 int = 반환타입(출력)  
 add = 메서드 이름  
@@ -48,27 +46,30 @@ add = 메서드 이름
 
 메서드이름(값1, 값2, ...);  //메서드를 호출하는 방법  
 
-print99danAll();  //void print99danAll()을 호출  
-int result = add(3,5);  //int add(int x, int y)를 호출하고 결과를 result에 저장  
+    print99danAll();  //void print99danAll()을 호출  
+    int result = add(3,5);  //int add(int x, int y)를 호출하고 결과를 result에 저장  
  
 
 
 return문
 ---------------------------
 *****
-"실행 중인 메서드를 종료하고 호출한 곳으로 되돌아간다."
+* 실행 중인 메서드를 종료하고 호출한 곳으로 되돌아간다.
+* 반환타입이 void가 아닌 경우, 반드시 return문 필요.
 
-void printGugudan(int dan){
-* if(!(2<=dan && dan <=9))
-  * return; //dan의 값이 2~9가 아닌 경우, 호출한 곳으로 그냥 되돌아간다.(아래 코드 진행안됨)
-* for(int i=1; i<=9; i++){
-  * System.out.printf("%d * %d = %d%n", dan, i, dan*i);
-* }
-* return; //반환 타입이 void이므로 생략가능. 컴파일러가 자동추가
 
-}
+    void printGugudan(int dan){
+        if(!(2<=dan && dan <=9)){
+            return; //dan의 값이 2~9가 아닌 경우, 호출한 곳으로 그냥 되돌아간다.(아래 코드 진행안됨)
+        }
 
-"반환타입이 void가 아닌 경우, 반드시 return문 필요"
+        for(int i=1; i<=9; i++){
+            System.out.printf("%d * %d = %d%n", dan, i, dan*i);
+        }
+        return; //반환 타입이 void이므로 생략가능. 컴파일러가 자동추가
+    }
+
+
 
 
 
@@ -101,18 +102,17 @@ static 메서드  = 클래스 메서드
 
 ex) Math.random() => 객체 생성x => static 메서드
 
-class MyMath2 {
-* long a, b; //iv 인스턴스 변수
+    class MyMath2 {
+        long a, b; //iv 인스턴스 변수
 
-* long add() { //인스턴스 메서드
-  * return a+b;
-* }
+        long add() { //인스턴스 메서드
+            return a+b;
+        }
 
-* static long add(long a, long b) { //클래스메서드(static메서드)
-  * return a+b; //lv 지역변수 a, b
-* }
-
-}
+        static long add(long a, long b) { //클래스메서드(static메서드)
+            return a+b; //lv 지역변수 a, b
+        }
+    }
 
 
 static을 언제 붙여야 할까?
@@ -127,41 +127,41 @@ static을 언제 붙여야 할까?
 ----------------
 *****
 
-"static 메서드는 인스턴스 변수(iv)를 사용할 수 없다."
+* static 메서드는 인스턴스 변수(iv)를 사용할 수 없다.
 
-class TestClass2 {
-- int iv; //인스턴스 변수
-- static int cv; //클래스 변수
 
-- void instanceMethod() { //인스턴스 메서드 : 객체 생성 후 호출 가능
-  - System.out.println(iv);  //인스턴스 변수를 사용할 수 있다.
-  - System.out.println(cv);  //클래스 변수를 사용할 수 있다.
-- }
+    class TestClass2 {
+        int iv; //인스턴스 변수
+        static int cv; //클래스 변수
 
-- static void staticMethod() { //static 메서드 : 객체 생성 없이 호출 가능
-  - System.out.println(iv); //*****에러***** 인스턴스 변수를 사용할 수 없다. (iv는 객체 생성 후 사용할 수 있기 때문에)
-  - System.out.println(cv); //클래스 변수는 사용할 수 있다.
-- }
+        void instanceMethod() { //인스턴스 메서드 : 객체 생성 후 호출 가능
+            System.out.println(iv);  //인스턴스 변수를 사용할 수 있다.
+            System.out.println(cv);  //클래스 변수를 사용할 수 있다.
+        }
 
-}
+        static void staticMethod() { //static 메서드 : 객체 생성 없이 호출 가능
+            System.out.println(iv); //*****에러***** 인스턴스 변수를 사용할 수 없다. (iv는 객체 생성 후 사용할 수 있기 때문에)
+            System.out.println(cv); //클래스 변수는 사용할 수 있다.
+        }
+    }
 
-"static 메서드는 인스턴스 메서드(im)를 호출할 수 없다."
+* static 메서드는 인스턴스 메서드(im)를 호출할 수 없다.
 
-class TestClass {
-- void instanceMethod() {} //인스턴스 메서드
-- static void staticMethod() {} //static 메서드
 
-- void instanceMethod2(){ //인스턴스 메서드
-  - instanceMethod(); //다른 인스턴스 메서드 호출 가능
-  - staticMethod(); //다른 static 메서드 호출 가능
-- }
+    class TestClass {
+        void instanceMethod() {} //인스턴스 메서드
+        static void staticMethod() {} //static 메서드
 
-- static void staticMethod2() { //static 메서드
-  - instanceMethod(); //*****에러***** 인스턴스 메서드 호출 불가.
-  - staticMethod(); //다른 static 메서드 호출 가능
-- }
+        void instanceMethod2(){ //인스턴스 메서드
+            instanceMethod(); //다른 인스턴스 메서드 호출 가능
+            staticMethod(); //다른 static 메서드 호출 가능
+        }
 
-}
+        static void staticMethod2() { //static 메서드
+            instanceMethod(); //*****에러***** 인스턴스 메서드 호출 불가.
+            staticMethod(); //다른 static 메서드 호출 가능
+        }
+    }
 
 
 

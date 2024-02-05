@@ -8,12 +8,14 @@
 "인스턴스가 생성될 때마다 호출되는 '인스턴스 초기화 메서드'"  
 "인스턴스 생성시 수행할 작업(iv 초기화)에 사용"
 
-Time t = new Time();  //Time() <- 기본 생성자 호출
-t.hour = 12;  
-t.minute = 34;  
-t.second = 56;  
+
+    Time t = new Time();  //Time() <- 기본 생성자 호출
+    t.hour = 12;  
+    t.minute = 34;  
+    t.second = 56;  
 =>  
-Time t = new Time(12, 34, 56);  
+
+    Time t = new Time(12, 34, 56);  
 
 
 생성자 규칙
@@ -24,24 +26,24 @@ Time t = new Time(12, 34, 56);
 2. 리턴값이 없다.(void 안붙임)
 3. 모든 클래스는 반드시 생성자를 가져야 한다.
 
-클래스이름(타입 변수명, 타입 변수명, ...){
-* //인스턴스 생성 시 수행될 코드,
-* //주로 인스턴스 변수의 초기화 코드를 적는다.
 
-}  
+    클래스이름(타입 변수명, 타입 변수명, ...){
+        //인스턴스 생성 시 수행될 코드,
+        //주로 인스턴스 변수의 초기화 코드를 적는다.
+    }  
 =>  
-class Card{   
-* ...
-* Card() { //생성자 오버로딩
-  * //매개변수 없는 생성자.
-  * //인스턴스 초기화 작업
-* }
-* Card(String kind, int number) { //생성자 오버로딩
-  * //매개변수 있는 생성자
-  * //인스턴스 초기화 작업
-* }
 
-} 
+    class Card{   
+        ...
+        Card() { //생성자 오버로딩
+            //매개변수 없는 생성자.
+            //인스턴스 초기화 작업
+        }
+        Card(String kind, int number) { //생성자 오버로딩
+            //매개변수 있는 생성자
+            //인스턴스 초기화 작업
+        }
+    } 
 
 
 기본 생성자(default constructor)
@@ -50,8 +52,8 @@ class Card{
 "매개변수가 없는 생성자"  
 "생성자가 하나도 없을 때만, 컴파일러가 자동 추가"  
 
-클래스이름() {} //기본생성자  
-Point() {} //Point 클래스의 기본생성자  
+    클래스이름() {} //기본생성자  
+    Point() {}    //Point 클래스의 기본생성자  
 
 => 생성자가 하나라도 있자면 기본생성자 직접 작성해줘야 함  
 => 다른 생성자가 없더라고 기본생성자를 작성하는 습관을 들이자.
@@ -61,30 +63,32 @@ Point() {} //Point 클래스의 기본생성자
 ----------------
 *****
 
-class Car {  
-String color;  //색상  
-String gearType;  //변속기 종류 - auto(자동), manual(수동)  
-int door;  //문의 개수  
+    class Car {  
+        String color;  //색상  
+        String gearType;  //변속기 종류 - auto(자동), manual(수동)  
+        int door;  //문의 개수  
 
-Car(){}  //기본생성자  
-Car(String c, String g, int d)   //매개변수가 있는 생성자  
-{  
-color = c;  
-gearType = g;  
-door =d;  
-}
-}
+        Car(){}  //기본생성자  
+        Car(String c, String g, int d){   //매개변수가 있는 생성자  
+            color = c;  
+            gearType = g;  
+            door =d;  
+        }
+    }
 
-Car c = new Car(); 
-c.color = "white";  
-c.gearType = "auto";  
-c.door = 4;  
+<br>
+
+    Car c = new Car();  //기본 생성자 호출
+    c.color = "white";  
+    c.gearType = "auto";  
+    c.door = 4;  
 =>  
-Car c = new Car("white", "auto", 4);  
+    
+    Car c = new Car("white", "auto", 4);  //매개변수가 있는 생성자 호출
 
-Car c = 참조변수생성  
-new -> 객체생성  
-Car("white", "auto", 4) -> 객체초기화=생성자호출
+    //Car c = 참조변수생성  
+    //new -> 객체생성  
+    //Car("white", "auto", 4) -> 객체초기화=생성자호출
 
 
 생성자 this()
