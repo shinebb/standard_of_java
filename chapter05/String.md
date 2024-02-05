@@ -21,28 +21,38 @@ String클래스의 주요 메서드
 -----------------
 *****
 
-char charAt(int index) : 문자열에서 해당 위치(index)에 있는 문자를 반환한다.  
-: String str = "ABCDE";  
-char ch = str.charAt(3);  //문자열 str의 4번째 문자 'D'를 ch에 저장.  
--------------------  
-index 0 1 2 3 4  
-문자 'A''B''C''D''E'  
--------------------  
+* char charAt(int index) : 문자열에서 해당 위치(index)에 있는 문자를 반환한다.  
 
 
-int length() : 문자열의 길이를 반환한다.  
-: str.legnth() == 5
+    String str = "ABCDE";  
+    char ch = str.charAt(3);  //문자열 str의 4번째 문자 'D'를 ch에 저장.  
+    -------------------  
+    index 0 1 2 3 4  
+    문자 'A''B''C''D''E'  
+    -------------------  
 
-String substring(int from, int to) : 문자열에서 해당 범위(from~to)의 문자열을 반환한다.(to는 포함 안됨)  
-: String str = "012345";  
-String tmp = str.substring(1,4);  //str에서 index범위 1~4의 문자들을 반환(4는 포함되지 않는다.)  
-System.out.println(tmp); //"123"이 출력된다.  
 
-boolean equals(Object obj) : 문자열의 내용이 같은지 확인한다. 같으면 결과는 true, 다르면 false
-: tmp.equals("123") == true  
+* int length() : 문자열의 길이를 반환한다.  
 
-char[] toCharArray() : 문자열을 문자배열(char[])로 변환해서 반환한다.
-: char[] ch = tmp.toCharArray();
-ch => {'1', '2', '3'}
+
+    str.legnth() == 5
+
+* String substring(int from, int to) : 문자열에서 해당 범위(from~to)의 문자열을 반환한다.(to는 포함 안됨)  
+
+
+    String str = "012345";  
+    String tmp = str.substring(1,4);  //str에서 index범위 1~4의 문자들을 반환(4는 포함되지 않는다.)  
+    System.out.println(tmp); //"123"이 출력된다.  
+
+* boolean equals(Object obj) : 문자열의 내용이 같은지 확인한다. 같으면 결과는 true, 다르면 false
+
+
+    tmp.equals("123") == true  
+
+* char[] toCharArray() : 문자열을 문자배열(char[])로 변환해서 반환한다.
+
+
+    char[] ch = tmp.toCharArray();
+    ch => {'1', '2', '3'}
 
 
