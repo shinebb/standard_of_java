@@ -69,10 +69,14 @@ y = 4 * x + 3; //x의 값이 5라면, y의 값은 23이 된다.
 * 후위형 : 값이 참도된 후에 증가시킨다.  : j = i++;  
 => "증감 연산자가 독립적으로 사용된 경우, 전위형과 후위형의 차이가 없다."   
 <br>
-ex) j = ++i; // 전위형  
-=> ++i; j = i; //증가 후에 참조하여 대입  
-  ex) j = i++; // 후위형  
-  => j = i; i++; //참조하여 대입 후에 증가
+
+
+
+    j = ++i; // 전위형  
+    => ++i; j = i; //증가 후에 참조하여 대입  
+
+    j = i++; // 후위형  
+    => j = i; i++; //참조하여 대입 후에 증가
 
 
 
@@ -81,10 +85,12 @@ ex) j = ++i; // 전위형
 *****
 
 * '-'는 피연산자의 부호를 반대로 변경 (단항연산자)  
-ex)  
-int i = -10;  
-i = -1;  
-System.out.println(i); //10  
+
+
+
+    int i = -10;  
+    i = -1;  
+    System.out.println(i); //10  
 
 
 형변환연산자
@@ -95,10 +101,11 @@ System.out.println(i); //10
 : 변수 또는 상수의 타입을 다른 타입으로 변환하는 것  
 "(타입)피연산자"
 
-double d = 85.4;  
-int score = (int)d;  
-int score = (int)85.4;  
-int score = 85;  
+
+      double d = 85.4;  
+      int score = (int)d;  
+      int score = (int)85.4;  
+      int score = 85;  
   
 char 유니코드로 정수변환 가능  
 실수에서 정수 변환시 반올림되지않는다.
@@ -127,24 +134,23 @@ char -> int
 
 long(8byte) -> float(4byte) float가 작지만 실제표현할수있는 값의 범위는 실수형이 크기때문에 가능하다.
 
-float f = 1234;  //int타입의 값을 float타입의 변수에 저장  
-int i = 3.14f;   //error -> float보다 int가 저 작기때문에 값 손실 발생이 일어날 수 있어 자동형변환이안된다.  
-int i = (int)3.14f;  //가능  
 
+    float f = 1234;  //int타입의 값을 float타입의 변수에 저장  
+    int i = 3.14f;   //error -> float보다 int가 저 작기때문에 값 손실 발생이 일어날 수 있어 자동형변환이안된다.  
+    int i = (int)3.14f;  //가능  
 
-byte b = 10;  
-int i = b;  //자동형변환 가능  
-int i2 = 300;  
-byte b2 = (byte)i2;  //자동형변환 불가로 (타입)으로 수동형변환  
-<br>  
+    byte b = 10;  
+    int i = b;  //자동형변환 가능  
+    int i2 = 300;  
+    byte b2 = (byte)i2;  //자동형변환 불가로 (타입)으로 수동형변환
 
-byte b = 100;  //ok  100=리터럴=상수
-int i = 100;  
-byte b = i;  //에러  i=변수
-byte b = (byte)i;  //ok. 수동형변환 필요  
+    byte b = 100;  //ok  100=리터럴=상수
+    int i = 100;  
+    byte b = i;  //에러  i=변수
+    byte b = (byte)i;  //ok. 수동형변환 필요  
   
-byte b = 1000;  //에러. byte타입의 범위(-128~127)  
-byte b  = (byte)1000;  //ok. 그러나 값 손실이 발생해서 변수 b에는 -24가 저장됨.  
+    byte b = 1000;  //에러. byte타입의 범위(-128~127)  
+    byte b  = (byte)1000;  //ok. 그러나 값 손실이 발생해서 변수 b에는 -24가 저장됨.  
   
 
 산술변환
@@ -189,17 +195,18 @@ int y = 8;
 * 문자열의 비교
 : 문자열 비교에는 == 대신 equals()를 사용해야 한다.  
 
-String str1 = "abc";  
-String str2 = "abc";  
 
-System.out.println(str1==str2);   //true   
-System.out.println(str1.equals(str2)); //true  
+      String str1 = "abc";  
+      String str2 = "abc";  
 
-String str1 = new String("abc");  
-String str2 = new String("abc");  
+      System.out.println(str1==str2);   //true   
+      System.out.println(str1.equals(str2)); //true  
 
-System.out.println(str1==str2);   //false  
-System.out.println(str1.equals(str2)); //true    
+      String str1 = new String("abc");  
+      String str2 = new String("abc");  
+
+      System.out.println(str1==str2);   //false  
+      System.out.println(str1.equals(str2)); //true    
   
 * 참고    
 : str.equalsIgnoreCase("yes") : 문자열 str의 내용이 "yes"일 때(대소문자 구문안함)
@@ -269,7 +276,9 @@ rvalue : 대입 연산자의 오른쪽 피연산자
 *****
 "대입 연산자와 다른 연산자를 하나로 축약"  
 
-i += 3; => i = i+3;
+    i += 3; 
+    => 
+    i = i+3;
 
 
 

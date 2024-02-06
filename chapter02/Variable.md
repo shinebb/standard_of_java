@@ -77,23 +77,23 @@ MAX -> 상수
 -----------------
 *****
 
-boolean power = true; //또는 false   
-char ch = 'A';  //문자형   
-String str = "ABC";   //문자열  
+    boolean power = true; //또는 false   
+    char ch = 'A';  //문자형   
+    String str = "ABC";   //문자열  
 
-byte b = 127; //리터럴 127의 타입은? 정수인데 접미사가 없으므로 int type  
-  //바이트와 숏트타입의 리터럴은 없으므로 정수형 int 타입의 리터럴이 저장되며    
-  //대신 바이트타입의 변수가 저장할 수 있는 범위여야 한다. (-128~127)   
+    byte b = 127; //리터럴 127의 타입은? 정수인데 접미사가 없으므로 int type  
+    //바이트와 숏트타입의 리터럴은 없으므로 정수형 int 타입의 리터럴이 저장되며    
+    //대신 바이트타입의 변수가 저장할 수 있는 범위여야 한다. (-128~127)   
 
-byte b = 128; //에러발생   
-int i = 100; //10진수   
-int oct = 0100; //8진수  
-int hex = 0x100; //16진수  
+    byte b = 128; //에러발생   
+    int i = 100; //10진수   
+    int oct = 0100; //8진수  
+    int hex = 0x100; //16진수  
 
-long l = 10000000000L; //100억, integer 최대값 20억 => L 꼭 붙여야함 아니면 int로 인식  
-long l = 100; //OK  
-float f = 3.14f; //f생략불가 -> f없으면 double로 인식  
-double d = 3.14d; //d생략가능  
+    long l = 10000000000L; //100억, integer 최대값 20억 => L 꼭 붙여야함 아니면 int로 인식  
+    long l = 100; //OK  
+    float f = 3.14f; //f생략불가 -> f없으면 double로 인식  
+    double d = 3.14d; //d생략가능  
  
 10 . => 10.0 => double  
 .10 => 0.10 => double  
@@ -102,40 +102,48 @@ double d = 3.14d; //d생략가능
     (e=10n승)
 
 * 변수와 리터럴의 타입 불일치
-: 
+:
 1. 범위가 '변수(그릇) > 리터럴(물건)'인 경우, OK  
-* int i = 'A';   // int > char(65)  
-* long l = 123;  // long > int  
-* double d = 3.14f;  //double > float  
-*   
+
+
+      int i = 'A';   // int > char(65)  
+      long l = 123;  // long > int  
+      double d = 3.14f;  //double > float  
+  
 2. 범위가 '변수(그릇) < 리터럴(물건)'인 경우, 에러    
-* int i = 30_0000_0000;  //int의 범위(+-20억) 벗어남  
-* long l = 3.14f;  //long(8byte) < float(4byte) => 실수형은 정수형보다 저장범위가 넒다. error  
-* float f = 3.14;  //float < double(생략)  
-*   
+
+
+    int i = 30_0000_0000;  //int의 범위(+-20억) 벗어남  
+    long l = 3.14f;  //long(8byte) < float(4byte) => 실수형은 정수형보다 저장범위가 넒다. error  
+    float f = 3.14;  //float < double(생략)  
+  
 3. byte, short 변수는 해당 리터럴이 없기때문에 int형 리터럴 저장가능  
-* byte b = 100; //OK. byte의 범위(-128~127)에 속함  
-* byte b = 128; //에러. byte의 범위를 벗어남  
+
+
+    byte b = 100; //OK. byte의 범위(-128~127)에 속함  
+    byte b = 128; //에러. byte의 범위를 벗어남  
 
 
 문자와 문자열
 --------------
 *****
-char ch = 'A';  //문자  
-char ch = 'AB'; //에러  
-String s = "ABC"; //문자열 또는 문자열리터럴  
 
-String => Class이다.  
-String s1 = "AB";
-String s2 = new String("AB");   
-//클래스는 new 객체를 생성해야하지만, 문자열은 워낙 자주 쓰이기 때문에 기본형 변수처럼 표현 허용
+    char ch = 'A';  //문자  
+    char ch = 'AB'; //에러  
+    String s = "ABC"; //문자열 또는 문자열리터럴  
 
-String s = "A";  
-String s = "";  //빈 문자열  
-Char ch = '';   //에러  
+    String => Class이다.  
+    String s1 = "AB";
+    String s2 = new String("AB");   
+    //클래스는 new 객체를 생성해야하지만, 문자열은 워낙 자주 쓰이기 때문에 기본형 변수처럼 표현 허용
 
-String s1 = "A" + "B"; //"AB"  
-String s2 = "" + "7";  //"7"
+    String s = "A";  
+    String s = "";  //빈 문자열  
+    Char ch = '';   //에러  
+
+    String s1 = "A" + "B"; //"AB"  
+    String s2 = "" + "7";  //"7"
+
 
 ""+7+7 => "7"+7 => "7"+"7" => "77"  
 7+7+"" => 14+"" => "14"+"" => "14"  
