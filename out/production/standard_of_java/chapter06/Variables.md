@@ -6,15 +6,14 @@
 ---------
 *****
 
-class Variables { //클래스 영역
-* int iv;  //인스턴스 변수(instanceVariable)
-* static int cv;  //클래스 변수(static변수, 공유변수)  
-<br>  
-* void method() {  //메서드영역
-* * int lv = 0;  //지역변수(localVariable) 
-* }
-
-}
+    class Variables { //클래스 영역
+        int iv;  //인스턴스 변수(instanceVariable)
+        static int cv;  //클래스 변수(static변수, 공유변수)  
+  
+        void method() {  //메서드영역
+            int lv = 0;  //지역변수(localVariable) 
+        }
+    }
 
 영역 1. 클래스영역 : iv, cv    
 : 클래스 영역은 선언문만 가능하다.(변수선언, 메서드선언)  
@@ -39,19 +38,20 @@ class Variables { //클래스 영역
 개별 속성 : 무늬, 숫자   
 공통 속성 : 폭, 높이  
 =>  
-Class Card {
-* String kind; //무늬
-* int number; //숫자
-* static int width=100; //폭
-* static int height=250; //높이
 
-}
+    Class Card {
+        String kind; //무늬
+        int number; //숫자
+        static int width=100; //폭
+        static int height=250; //높이
+    }
+<br>
 
-Card c = new Card();  
-c.kind = "heart";  
-c.number = 5;  
-Card.width = 200; //c.width도 가능하지만 클래스변수는 클래스명을 써주는 것이 좋다.  
-Card.height = 300;    
+    Card c = new Card();  
+    c.kind = "heart";  
+    c.number = 5;  
+    Card.width = 200; //c.width도 가능하지만 클래스변수는 클래스명을 써주는 것이 좋다.  
+    Card.height = 300;    
 
 
 
@@ -61,20 +61,18 @@ Card.height = 300;
 "지역변수(lv)는 직접 수동 초기화 해야함(사용전 꼭!)"  
 "멤버변수(iv, cv)는 자동 초기화 된다."
 
-class InitTest {
-* int x; //인스턴스 변수
-* int y = x; //인스턴스 변수
+    class InitTest {
+        int x; //인스턴스 변수
+        int y = x; //인스턴스 변수
 
-* void method1(){
-  * int i; //지역 변수
-  * int j = i; //####에러##### 지역변수를 초기화하지 않고 사용
-* }
-
-}
+        void method1(){
+            int i; //지역 변수
+            int j = i; //####에러##### 지역변수를 초기화하지 않고 사용
+        }
+    }
 
 //지역변수에 경우 해당 메서드 사용으로 재사용이 빈번한데 매번 0으로 자동초기화되면 성능이 떨어짐.  
 //따라서 새로운 값으로 덮어씌어 초기화시키는 것이 좋다.
-  
 //인스턴스 변수에 경우 유지시간이 길기때문에 자동 초기화로 둬도 괜찮다.  
 
 (자료형 기본값 : 0 / 참조형 : null)  
@@ -85,24 +83,29 @@ class InitTest {
 *****
 
 1. 명시적 초기화(=, 간단초기화)
-: int door = 4; //기본형(primitive type) 변수의 초기화    
-Engine e = new Engine() //참조형(reference type) 변수의 초기화  
+
+    
+    int door = 4; //기본형(primitive type) 변수의 초기화    
+    Engine e = new Engine() //참조형(reference type) 변수의 초기화  
 => 참조형 변수가 가질 수 있는 값은 null(기본값) 또는 객체주소이다.  
 => 그러나 처음에 null이 들어가는 것은 초기화가 아니다.  
 => 객체를 생성해주어야 한다.  
 
 
 2. 초기화 블럭(복잡초기화)) - 사용 거의 안함
-: 인스턴스 초기화 블럭 : {}  
-클래스 초기화 블럭 : static {}  
+
+
+    인스턴스 초기화 블럭 : {}  
+    클래스 초기화 블럭 : static {}  
 
 3. 생성자(iv초기화, 복잡초기화)
-: Car(String c, String g, int d) 
-   {  
-   color = c;  
-   gearType = g;  
-   door =d;  
-   }
+
+
+    Car(String c, String g, int d){  
+        color = c;  
+        gearType = g;  
+        door =d;  
+    }
 
 
 * 클래스 변수 초기화 시점 : 클래스가 처음 로딩될 때 단 한번

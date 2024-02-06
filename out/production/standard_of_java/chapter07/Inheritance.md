@@ -4,14 +4,15 @@
 "기존의 클래스로 새로운 클래스를 작성하는 것.(코드의 재사용)"  
 "두 클래스를 부모와 자식으로 관계를 맺어주는 것."
 
-class 자식클래스 extends 부모클래스 {  
-//..  
-}  
+
+    class 자식클래스 extends 부모클래스 {  
+        //..  
+    }  
 
 =>
 
-class Parent {} //부모클래스  
-class Child extends Parent {} //자식클래스  
+    class Parent {} //부모클래스  
+    class Child extends Parent {} //자식클래스  
 
 
 
@@ -30,18 +31,17 @@ class Child extends Parent {} //자식클래스
 
 "클래스의 멤버로 참조변수를 선언하는 것"
 
-class Point {
-* int x;
-* int y;
-
-}
+    class Point {
+        int x;
+        int y;
+    }
 
 =>
-class Circle {
-* Point c = new Point();  //원점
-* int r; //반지름(radius)
 
-}
+    class Circle {
+        Point c = new Point();  //원점
+        int r; //반지름(radius)
+    }
 
 => Circle은 Point를 포함하고 있다.
 

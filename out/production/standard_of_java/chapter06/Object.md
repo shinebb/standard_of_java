@@ -41,16 +41,16 @@ ex)
 
 객체 = 속성(변수) + 기능(메서드)  
 
-class Tv{ //클래스 Tv = 설계도
-* String color; //변수 색깔
-* boolean power; //변수 전원상태
-* int channer; //변수 채널    
-  
-* void power() {power = !power;}  //메서드
-* void channelUp() {channel++} //메서드
-* void channelDown() {channel--} //메서드
 
-}
+    class Tv{ //클래스 Tv = 설계도
+        String color; //변수 색깔
+        boolean power; //변수 전원상태
+        int channer; //변수 채널    
+
+        void power() {power = !power;}  //메서드
+        void channelUp() {channel++} //메서드
+        void channelDown() {channel--} //메서드
+    }
 
 
 객체와 인스턴스
@@ -87,19 +87,22 @@ class Tv{ //클래스 Tv = 설계도
 *****
 
 1. 객체의 생성
-: 
-클래스명 변수명; //클래스의 객체를 참조하기 위한 참조변수를 선언    
-변수명 = new 클래스명(); //클래스의 객체를 생성 후, 객체의 주소를 참조변수에 저장  
+
+
+    클래스명 변수명; //클래스의 객체를 참조하기 위한 참조변수를 선언    
+    변수명 = new 클래스명(); //클래스의 객체를 생성 후, 객체의 주소를 참조변수에 저장  
 ->  
-Tv t;  //Tv클래스 타입의 참조변수 t를 선언  
-t = new Tv();  //Tv인스턴스를 생성한 후, 생성된 Tv인스턴스의 주소를 t에 저장  
+
+    Tv t;  //Tv클래스 타입의 참조변수 t를 선언  
+    t = new Tv();  //Tv인스턴스를 생성한 후, 생성된 Tv인스턴스의 주소를 t에 저장  
 
 
 2. 객체의 사용
-: 
-t.channel = 7;  //Tv인스턴스의 멤버변수 channel의 값을 7로 한다.  
-t.channelDown();  //Tv인스턴스의 메서드 channelDown()를 호출한다.  
-System.out.println("현재 채널은 " + t.channel + " 입니다.");    
+
+
+    t.channel = 7;  //Tv인스턴스의 멤버변수 channel의 값을 7로 한다.  
+    t.channelDown();  //Tv인스턴스의 메서드 channelDown()를 호출한다.  
+    System.out.println("현재 채널은 " + t.channel + " 입니다.");    
 
 
 * 가비지컬렉터(GC)
@@ -113,18 +116,22 @@ System.out.println("현재 채널은 " + t.channel + " 입니다.");
 *****
 
 객체 배열 == 참조변수 배열  
-Tv tv1, tv2, tv3  
-=>   
-Tv[] tvArr = new Tv[3]; //길이가 3인 Tv타입의 참조변수 배열
-//tvArr[0][1][2]는 현재 null  
-//(참조변수배열만 선언하면 null값이 들어가므로 하나씩 객체를 넣어줘야한다.)   
+    
 
-//객체를 생성해서 배열의 각 요소에 저장    
-TvArr[0] = new Tv();  
-TvArr[1] = new Tv();  
-TvArr[2] = new Tv();  
+    Tv tv1, tv2, tv3  
+=>   
+    
+    Tv[] tvArr = new Tv[3]; //길이가 3인 Tv타입의 참조변수 배열
+    //tvArr[0][1][2]는 현재 null  
+    //(참조변수배열만 선언하면 null값이 들어가므로 하나씩 객체를 넣어줘야한다.)   
+
+    //객체를 생성해서 배열의 각 요소에 저장    
+    TvArr[0] = new Tv();  
+    TvArr[1] = new Tv();  
+    TvArr[2] = new Tv();  
 =>  
-Tv[] tvArr = { new Tv(), new Tv(), new Tv() };  
+
+    Tv[] tvArr = { new Tv(), new Tv(), new Tv() };  
 
 
 

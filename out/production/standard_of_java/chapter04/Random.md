@@ -18,10 +18,10 @@
     0.0 <= Math.random() *3 < 3.0  
     => (0.0~2.9999...)  
   
-2. 각 변을 int형으로 변환한다.
-    (int)0.0 <= (int)(Math.random() * 3) < (int) 3.0
-    0 <= (int)(Math.random() *3) < 3 (0~2)
+2. 각 변을 int형으로 변환한다.  
+    (int)0.0 <= (int)(Math.random() * 3) < (int) 3.0  
+    0 <= (int)(Math.random() *3) < 3 (0~2)  
 
-3. 각 변에 1을 더한다.
-    0 + 1 <= (int)(Math.random() * 3) + 1 < 3 + 1
-    1 <= (int)(Math.random() * 3) + 1 < 4
+3. 각 변에 1을 더한다.  
+    0 + 1 <= (int)(Math.random() * 3) + 1 < 3 + 1  
+    1 <= (int)(Math.random() * 3) + 1 < 4  
