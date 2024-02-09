@@ -38,11 +38,31 @@
     Ambulance a = (Ambulance)f;     //에러. 상속관계가 아닌 클래스 간의 형변환 불가
 
 
+매개변수의 다형성
+======================
+"참조형 매개변수는 메서드 호출 시, 자신과 같은 타입 또는 자손타입의 인스턴스를 넘겨줄 수 있다."
+
+
+장점
+-------
+*****
+
+1. 다형적 매개변수
+2. 하나의 배열로 여러 종류 객체 다루기
 
 
 
+    class Product {
+        int price;        //제품가격
+        int bonusPoint;   //보너스점수
+    }
+    class Tv extends Product {}
+    class Computer extends Product {}
+    class Audio extends Product {}
 
-
+    class Buyer { //물건 사는 사람
+        int money = 1000; //소유금액
+      
 
 
 
