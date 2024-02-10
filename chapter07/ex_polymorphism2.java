@@ -48,7 +48,7 @@ class Audio extends Product {
 
 class Buyer { //물건 사는 사람
     int money = 1000; //소유금액
-    int bonusPoint = 0; //보너스점수
+    int bonusPoint = 0; //보너스점수z
 
     void buy(Product p){
         if(money < p.price)    {

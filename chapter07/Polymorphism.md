@@ -47,23 +47,8 @@
 -------
 *****
 
-1. 다형적 매개변수
+1. 다형적 매개변수(ex_polymorphism2.java)
 2. 하나의 배열로 여러 종류 객체 다루기
-
-
-
-    class Product {
-        int price;        //제품가격
-        int bonusPoint;   //보너스점수
-    }
-    class Tv extends Product {}
-    class Computer extends Product {}
-    class Audio extends Product {}
-
-    class Buyer { //물건 사는 사람
-        int money = 1000; //소유금액
-      
-
 
 
 
