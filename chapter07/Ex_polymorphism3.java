@@ -1,6 +1,6 @@
 package chapter07;
 
-public class ex_polymorphism3 {
+public class Ex_polymorphism3 {
     public static void main(String[] args){
         Buyer2 b = new Buyer2();
 
