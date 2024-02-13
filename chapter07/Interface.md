@@ -1,0 +1,117 @@
+인터페이스(interface)
+=========================
+
+* 추상 메서드의 집합
+* 구현된 것이 전혀 없는 설계도. 껍데기(모든 멤버가 public)
+
+    
+    interface 인터페이스이름 {
+        /* 모두 public */
+        public static final 타입 상수이름 = 값; //상수 #iv, cv 불가
+        public abstract 메서드이름(매개변수목록);  //추상메서드
+    }
+<br>
+
+    interface PlayingCard {
+        public static final int SPADE = 4;
+        final int DIAMOND = 3;  //public static final int DIAMOND = 3;
+        static int HEART = 2;   //public static final int HEART = 2;
+        int CLOVER = 1;         //public static final int CLOVER = 1;   
+        /* 인터페이스는 무조건 public static final 상수이기때문에 생략가능*/
+
+        public abstract String getCardNumber();
+        String getCardKind();   //public abstract String getCardKind();  
+        /* 인터페이스는 무조건 public abstract 이기때문에 생략가능*/
+    }
+    
+<br>  
+
+* 인터페이스의 조상은 인터페이스만 가능(Object가 최고 조상 아님)
+* 다중 상속이 가능.(추상메서드는 충돌해도 문제 없음)
+
+
+    interface Fightable extends (1)Movable, (2)Attackable {}
+
+
+인터페이스의 구현
+---------
+*****
+
+* 인터페이스에 정의된 추상 메서드를 완성하는 것
+
+
+    class 클래스이름 implements 인터페이스이름 {
+        //인터페이스에 정의된 추상메서드를 모두 구현해야 한다.
+    }
+
+<br>
+
+    interface Fightable {
+        void move(int x, int y);
+        void attack(Unit u);
+    }
+
+
+    class Fighter implements Fightable {
+        public void move(int x, int y) { /* 내용 생략 */ }
+        public void attack(Unit u) { /* 내용 생략 */ }
+    }
+
+    => Fighter 클래스는 Fightable 인터페이스를 구현했다.
+
+<br>  
+
+* 일부만 구현하는 경우, 클래스 앞에 abstract 를 붙여야 함.
+
+
+    abstract class Fighter implements Fightable {
+        public void move(int x, int y) { /* 내용 생략 */ }
+        /* 안보이지만 attack이 있기 때문에*/
+    }
+
+
+
+
+
+추상클래스와 인터페이스의 차이점
+---------
+*****
+
+추상클래스는 일반 클래스(생성자, iv와 같은 멤버변수를 가지고 있는) 인데 추상메서드를 가지고 있는 것이다.  
+인터페이스는 아무것도 없이 추상메서드만 가지고 있다. real 껍데기
+
+
+
+Q&A
+---------
+*****
+
+Q. 인터페이스란?  
+A. 추상 메서드의 집합  
+
+Q. 인터페이스의 구현이란?  
+A. 인터페이스의 추상메서드 몸통{} 만들기(미완성 설계도 완성하기)  
+
+Q. 추상클래스와 인터페이스의 공통점은?  
+A. 추상 메서드를 가지고 있다. (미완성 설계도)
+
+Q. 추상클래스와 인터페이스의 차이점은?  
+A. 인터페이스는 iv를 가질 수 없다. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
