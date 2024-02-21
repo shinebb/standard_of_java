@@ -61,6 +61,43 @@ Exception 과 RuntimeException
 
 
 
+예외 처리하기. try-catch문
+------
+*****
+
+
+    try {
+        // 예외가 발생할 가능성이 있는 문장들을 넣는다.
+    } catch(Exception1 e1) {
+        // Exception1이 발생했을 경우, 이를 처리하기 위한 문장을 적는다.
+    } catch(Exception2 e2) {
+        // Exception2이 발생했을 경우, 이를 처리하기 위한 문장을 적는다.
+    } catch(ExceptionN eN) {
+        // ExceptionN이 발생했을 경우, 이를 처리하기 위한 문장을 적는다.
+    }
+
+
+* try 블럭 내에서 예외가 발생한 경우
+  1. 발생한 예외와 일치하는 catch 블럭이 있는지 확인한다.
+  2. 일치하는 catch 블럭을 찾게 되면, 그 catch 블럭 내의 문장들을 수행하고 전체 try-catch 문을 빠져나가서
+  그 다음 문장을 계속해서 수행한다. 만일 일치하는 catch 블럭을 찾기 뭇하면, 예외는 처리되지 못한다.
+
+
+* try 블럭 내에서 예외가 발생하지 않은 경우.
+  1. catch 블럭을 거치지 않고 전체 try-catch문을 빠져나가서 수행을 계속한다.
+  
+
+
+printStackTrace()와 getMessage()
+---------
+*****
+
+* printStackTrace() : 예외발생 당시의 호출스택(Call Stack)에 있었던 메서드의 정보와 예외 메시지를 화면에 출력한다.
+* getMessage() : 발생한 예외클래스의 인스턴스에 저장된 메시지를 얻을 수 있다.
+
+
+
+
 
 
 
