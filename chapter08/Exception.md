@@ -120,6 +120,128 @@ printStackTrace()와 getMessage()
 
 
 
+예외 발생시키기
+----------
+*****
+
+1. 연산자 new를 이용해서 발생시키려는 예외 클래스의 객체를 만든 다음
+: exception e = new Exception("고의로 발생시켰음");
+
+2. 키워드 throw를 이용해서 예외를 발생시킨다.
+: throw e;
+
+<br>
+
+    try {
+        exception e = new Excepiotn("고의로 발생시켰음."); //객체 생성
+        throw e; //예외 발생시킴
+        //throw new Exception("고의로 발생시켰음."); //위의 두 줄을 한 줄로 줄여 쓸 수 있다.
+    
+    } catch (Exception e) { //일치
+        System.out.println("에러 메시지 : " + e.getMessage());
+        e.printStackTrace();
+    }
+    System.out.println("프로그램이 정상 종료되었음.");
+        
+
+
+예외 종류 : checked 예외, unchecked 예외
+-----------
+*****
+
+* checked 예외 : 컴파일러가 예외 처리 여부를 체크(예외 처리 필수)(Exception과 자손)
+* unchecked 예외 : 컴파일라가 예외 처리 여부를 체크 안함(예외 처리 선택)(RuntimeException과 자손)
+
+
+    public static void main(String[] args) {
+        throw new Exception();
+    }
+    // => 컴파일에러 발생. 예외 처리 필수.
+
+    public static void main(String[] args) {
+        thorw new RuntimeException(); 
+    }
+    // => try-catch문 없어도 컴파일 OK. 그러나 명확한 RuntimeException이기 때문에 에러 발생. 예외 처리 선택.
+    //두 구문 다 비정상 프로그램 종료.
+
+
+
+
+메서드에 예외 선언하기
+----------
+*****
+
+* 예외를 처리하는 방법 : try-catch문, 예외 선언하기
+* 메서드가 호출시 발생가능한 예외를 호출하는 쪽에 알리는 것
+* 예외를 발생시키는 키워드 throw와 예외를 메서드에 선선할 때 쓰이는 throws와 잘 구별하다.
+
+
+    void method() throws Exceoption1, Exceoption2, ... ExceoptionN {
+      //메서드 내용
+    }
+
+    //method()에서 Exception과 그 자손 예외 발생 가능
+    void method() throw Exception { //모든 종류의 예외가 발생 가능
+      //메서드 내용
+    }
+
+
+참고. 오버라이딩 조건
+1. 선언부 일치
+2. 접근제어자 좁게 X
+3. 조상보다 많은 예외 선언 X
+
+
+    static void startInstall() throws SpaceException, MemoryException {
+    /* startInstall() 메서드를 호출하면 SpaceException, MemoryException 가 발생할 수 있다는 것을 알려주는 것. 
+       그래서 startInstall() 메서드를 호출해서 사용하는쪽에서는 이 exception들에 대한 try-catch문이 필요하다.*/
+      if(!enoughSpace())  // 충분한 설치 공간이 없으며 예외를 발생시켜서 자신을 호출한 메서드에게 알려주는 것
+        throw new SpaceException("설치할 공간이 부족합니다.");
+      if(!enoughMemory())
+        throw new MemoryException("메모리가 부족합니다.");
+    }
+
+
+finally 블럭
+---
+*****
+
+* 예외 발생여부와 관계없이 수행되어야 하는 코드를 넣는다.
+
+
+    try {
+        //예외가 발생할 가능성이 있는 문장들을 넣는다.
+    } catch (Exception1 e1) {
+        //예외처리를 위한 문장을 적는다.
+    } finally {
+        //예외의 발생여부에 관계없이 항상 수행되어야하는 문장들을 넣는다.
+        //finally블럭은 try-catch문의 맨 마지막에 위치해야한다.
+    }
+
+참고 : try블럭 안에 return문이 있어서 try블럭을 벗어날 때도 finally블럭이 실행된다.
+
+
+    try {
+        startInstall();
+        copyFile();
+        deleteTempFiles(); //임시파일삭제
+    } catch(Exception e) {
+        e.printStackTrace();
+        deleteTempFiles(); //중복 : 에외가 발생하던 안하던 임시파일삭제는 이루어져야한다.
+    }
+
+=>
+
+    try {
+        startInstall();
+        copyFile();
+    } catch(Exception e) {
+        e.printStackTrace();
+    } finally {
+        deleteTempFiles(); //코드 중복 제거
+    }
+
+
 
 
 
