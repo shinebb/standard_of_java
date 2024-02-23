@@ -294,7 +294,97 @@ point.
 
 
 
+연결된 예외(chained exception)
+---------
+*****
 
+* 한 예외가 다른 예외를 발생시킬 수 있다.
+* 예외 A가 예외 B를 발생시키면, A는 B의 원인 예외(cause exception)  
+
+Throwable initCause(Throwable cause) : 지정한 예외를 원인 예외로 등록
+Throwable getCause() : 원인 예외를 반환
+
+
+    public class Throwable implements Serializable {
+        ...
+        private Throwable cause = this;  //객체 자신(this)를 원인 예외로 등록
+        ...
+        public synchronized Throwable initCause(Throwable cause) {
+            ... 
+            this.cause = cause; //cause를 원인 예외로 등록
+            return this;
+
+            //예외 안에 또다른 예외를 포함시킨다.
+        }
+        ...
+    }
+
+=>
+
+    void install() throws InstallException {
+        try {
+            startInstall();       //SpaceException 발생(저장공간부족)
+            copyFiles();
+        } catch(SpaceException e) {
+            InstallException ie = new InstallException("설치중 예외발생"; //예외 생성
+            ie.initCause(e);   //InstallException의 원인 예외를 SpaceException으로 지정
+            throw ie;          //InstallException을 발생시킨다.
+        } catch(MemoryException me) {
+            ...
+        }
+
+
+
+연결된 예외를 사용하는 이유
+------
+*****
+
+1. 여러 예외를 하나로 묶어서 다루기 위해서
+
+
+    try {
+        install(); //프로그램설치
+    } catch(SpaceException e) {
+        e.printStackTrace();
+    } catch(MemoryException e) {
+        e.printStackTrace();
+    } catch(Exception e) {
+        e.printStackTrace();
+    }
+
+=>
+ 
+    try {
+        install(); //프로그램설치
+    } catch(InstallException e) {
+        e.printStackTrace();
+    } catch(Exception e) {
+        e.printStackTrace();
+    }
+
+
+2. checked예외(Exception 자손 : 필수처리)를 unchecked예외(RuntimeException 자손 : 선택처리)로 변경하려 할 때
+
+
+    static void startInstall() throws SpaceException, MemoryException {
+        if(!enoughSpace()){
+            throw new SpaceException("설치할 공간이 부족합니다.");
+        }
+        if(!enoughMemory()){
+            throw new MemoryException("메모리가 부족합니다.");
+        }
+    }
+
+=>
+
+    static void startInstall() throws SpaceException {
+        if(!enoughSpace()){
+            throw new SpaceException("설치할 공간이 부족합니다.");
+        }
+        if(!enoughMemory()){
+            throw new RuntimeException(new MemoryException("메모리가 부족합니다."));
+        }
+    }
 
 
 
