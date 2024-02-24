@@ -202,4 +202,190 @@ printStackTrace()와 getMessage()
     }
 
 
+finally 블럭
+---
+*****
+
+* 예외 발생여부와 관계없이 수행되어야 하는 코드를 넣는다.
+
+
+    try {
+        //예외가 발생할 가능성이 있는 문장들을 넣는다.
+    } catch (Exception1 e1) {
+        //예외처리를 위한 문장을 적는다.
+    } finally {
+        //예외의 발생여부에 관계없이 항상 수행되어야하는 문장들을 넣는다.
+        //finally블럭은 try-catch문의 맨 마지막에 위치해야한다.
+    }
+
+참고 : try블럭 안에 return문이 있어서 try블럭을 벗어날 때도 finally블럭이 실행된다.
+
+
+    try {
+        startInstall();
+        copyFile();
+        deleteTempFiles(); //임시파일삭제
+    } catch(Exception e) {
+        e.printStackTrace();
+        deleteTempFiles(); //중복 : 에외가 발생하던 안하던 임시파일삭제는 이루어져야한다.
+    }
+
+=>
+
+    try {
+        startInstall();
+        copyFile();
+    } catch(Exception e) {
+        e.printStackTrace();
+    } finally {
+        deleteTempFiles(); //코드 중복 제거
+    }
+
+
+사용자 정의 예외 만들기
+-----------
+*****
+
+* 우리가 직접 예외 클래스를 정의할 수 있다.
+* 조상은 Exception(사용자가 발생시키는 예외 : 필수처리)과 RuntimeException(프로그래머의 실수로 발생시키는 예외 : 선택처리)중에서 선택
+-> 가능하면 선택처리가 가능한 RuntimeException 을 선택하는것이 좋다.
+
+
+    class MyException extends Exception {  //필수처리예외 : try-catch문 필수
+        MyException(String msg) {  //문자열을 매개변수로 받는 생성자
+            super(msg); //조상인 Exception 클래스의 생성자를 호출한다.
+        }
+    }
+
+=>
+
+    class MyException extends Exception {  //필수처리예외 : try-catch문 필수
+
+        private final int ERR_CODE; //생성자를 통해 초기화 한다.
+
+        MyException(String msg, int errCode) { //생성자
+            super(msg);
+            ERR_CODE = errCode;
+        }
+
+        MyException(String msg) {  //생성자
+            this(msg, 100); //ERR_CODE를 100(기본값)으로 초기화한다.
+        }
+
+        public int getErrCode() { //에러 코드를 얻을 수 있는 메서드도 추가했다.
+            return ERR_CODE;  //이 메서드는 주로 getMessage()와 함게 사용될 것이다.
+        }
+    }
+    
+
+point.
+1. exception 과 RuntimeException 중에 선택하는 것 
+2. String 매개변수가 있는 생성자를 넣어주는 것
+
+
+
+예외 되던지기(exception re-throwing)
+--------------
+*****
+
+* 예외를 처리한 후에 다시 예외를 발생시키는 것
+* 호출한 메서드와 호출된 메서드 양쪽 모두에게 예외처리하는 것 
+=> 예외 처리를 2번 하게 된다.
+
+
+
+연결된 예외(chained exception)
+---------
+*****
+
+* 한 예외가 다른 예외를 발생시킬 수 있다.
+* 예외 A가 예외 B를 발생시키면, A는 B의 원인 예외(cause exception)  
+
+Throwable initCause(Throwable cause) : 지정한 예외를 원인 예외로 등록
+Throwable getCause() : 원인 예외를 반환
+
+
+    public class Throwable implements Serializable {
+        ...
+        private Throwable cause = this;  //객체 자신(this)를 원인 예외로 등록
+        ...
+        public synchronized Throwable initCause(Throwable cause) {
+            ... 
+            this.cause = cause; //cause를 원인 예외로 등록
+            return this;
+
+            //예외 안에 또다른 예외를 포함시킨다.
+        }
+        ...
+    }
+
+=>
+
+    void install() throws InstallException {
+        try {
+            startInstall();       //SpaceException 발생(저장공간부족)
+            copyFiles();
+        } catch(SpaceException e) {
+            InstallException ie = new InstallException("설치중 예외발생"; //예외 생성
+            ie.initCause(e);   //InstallException의 원인 예외를 SpaceException으로 지정
+            throw ie;          //InstallException을 발생시킨다.
+        } catch(MemoryException me) {
+            ...
+        }
+
+
+
+연결된 예외를 사용하는 이유
+------
+*****
+
+1. 여러 예외를 하나로 묶어서 다루기 위해서
+
+
+    try {
+        install(); //프로그램설치
+    } catch(SpaceException e) {
+        e.printStackTrace();
+    } catch(MemoryException e) {
+        e.printStackTrace();
+    } catch(Exception e) {
+        e.printStackTrace();
+    }
+
+=>
+ 
+    try {
+        install(); //프로그램설치
+    } catch(InstallException e) {
+        e.printStackTrace();
+    } catch(Exception e) {
+        e.printStackTrace();
+    }
+
+
+2. checked예외(Exception 자손 : 필수처리)를 unchecked예외(RuntimeException 자손 : 선택처리)로 변경하려 할 때
+
+
+    static void startInstall() throws SpaceException, MemoryException {
+        if(!enoughSpace()){
+            throw new SpaceException("설치할 공간이 부족합니다.");
+        }
+        if(!enoughMemory()){
+            throw new MemoryException("메모리가 부족합니다.");
+        }
+    }
+
+=>
+
+    static void startInstall() throws SpaceException {
+        if(!enoughSpace()){
+            throw new SpaceException("설치할 공간이 부족합니다.");
+        }
+        if(!enoughMemory()){
+            throw new RuntimeException(new MemoryException("메모리가 부족합니다."));
+        }
+    }
+
+
+
 
