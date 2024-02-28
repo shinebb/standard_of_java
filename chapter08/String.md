@@ -262,3 +262,95 @@ obj가 String이 아닌거나 문자열이 다르면 false를 반환한다.
     java.util.Date dd = new java.Util.Date();
     String date = String.valueOf(dd); // date="Wed Jan 27 21:26:29 KST 2024"
 
+
+
+join()과 StringJoiner
+--------------
+*****
+
+* join()은 여러 문자열 사이에 구분자를 넣어서 결합니다.
+
+
+    String animals = "dog,cay,bear";
+    String[] arr = animals.split(","); //문자열을 ','를 구분자로 나워서 배열에 저장
+    String str = String.join("-",arr); //배열의 문자열을 '-'로 구분해서 결합
+    System.out.println(str);  //dog-cat-bear
+
+
+문자열과 기본형 간의 변황
+-------------
+*****
+
+* 숫자를 문자열로 바꾸는 방법
+
+
+    int i = 100;
+    String str1 = i+""; // "100"
+    String str2 = String.valueOf(i); //"100"
+
+
+* 문자열을 숫자로 바꾸는 방법
+
+
+    int i = Integer.parseInt("100"); //100
+    int i2 = Integer.valueOf("100"); //100
+    Integer i2 = Integer.valueOf("100"); //100
+
+
+StringBuffer 클래스
+* String 처럼 문자형 배열(char[])을 내부적으로 가지고 있다.
+* 그러나, String과 달리 내용을 변경할 수 있다.(mutable)
+
+
+    StringBuffer sb = new StringBuffer("abc"); //abc
+    sb.append("123");   //abc123 ->주소값 변환없이 객체 sb의 값만 변경됨
+
+* 배열은 길이 변경불가. 공간이 부족하면 새로운 배열 생성해야한다.
+* StringBuffer는 저장할 문자열의 길이를 고려해서 적절한 크기로 생성해야 한다.
+
+
+    public StringBuffer(int length){ //legnth로 적절한 크기 지정 가능
+        value = new char[length]
+        sharee = false;
+    }
+
+    public StringBuffer() {
+        this(16);       //버퍼의 크기를 지정하지 않으면 퍼버의 크기는 16이 된다.
+    }
+
+    public StringBuffer(String str) {
+        this(str.length() + 16); //지정한 문자열의 길이보다 16이 더 크게 버퍼를 생성한다.
+        sppend(str);
+    }
+
+
+* StringBuffer는 String과 달리 내용 변경이 가능하다.
+
+
+StringBuffer의 비교
+--------
+*****
+
+* StringBuffer는 equals()가 오버라이딩되어있지 않다.(주소비교)
+
+
+    StringBuffer sb = new StringBuffer("abc");
+    StringBuffer sb2 = new StringBuffer("abc");
+
+    System.out.println(sb==sb2);  //false
+    System.out.println(sb.equals(sb2));  //false
+
+
+* StringBuffer를 String으로 변환후에 equals()로 비교해야 한다.
+
+        
+    String s = sb.toString();  //sb를 String으로 변환
+    String s2 = sb2.toString(); 
+
+    System.out.println(s.equals(s2)); //true
+
+
+
+
+
+
