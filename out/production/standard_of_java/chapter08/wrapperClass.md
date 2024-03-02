@@ -20,9 +20,3 @@
     Integer i = new Integer("100"); //String타입 모두 가능
     Double d = new Double(1.0);
 
-
-Number 클래스
-============
-
-* 모든 숫자 래퍼 클래스의 조상
-
