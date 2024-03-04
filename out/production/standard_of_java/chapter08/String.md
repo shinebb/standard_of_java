@@ -297,3 +297,59 @@ join()과 StringJoiner
     Integer i2 = Integer.valueOf("100"); //100
 
 
+Number 클래스
+============
+
+* 모든 숫자 래퍼 클래스의 조상
+
+
+문자열을 숫자로 변환하기 
+-----------
+*****
+
+* 문자열을 숫자로 변환하는 다양한 방법
+
+
+    int i = new Integer("100").intValue();
+    int i2 = Integer.parseInt("100");
+    Integer i3 = Integer.valueOf("100");
+    int i4 = Integer.valueOf("100");
+
+
+Byte, Short, Long, Float, Double 모두 가능  
+byte, short, long, float, double 모두 가능  
+
+
+* n진법의 문자열을 숫자로 변환하는 방법
+
+
+    int i5 = Integer.parseInt("100", 2) //2진수 -> 4
+    int i5 = Integer.parseInt("100", 8) //8진수 -> 64
+    int i5 = Integer.parseInt("100", 16) //16진수 -> 256
+    int i5 = Integer.parseInt("FF", 16) //16진수 -> 255
+    int i5 = Integer.parseInt("FF") //진수를 안쓰면 10진수로 인식하기때문에 ###error###
+
+
+오토박싱 & 언박싱
+-------------------
+*****
+
+* 오토박싱 : int -> Integer //기본형 값을 객체로 자동변환
+* 언박싱 : Integer -> int  //객체를 기본형으로 
+
+
+    int i = 5;
+    Integer iObj = new Integer(7);
+
+    int sum = i + iObj; //int sum = i + iObj.intValue(); 컴파일러가 자동으로 바꿔줌
+
+
+
+
+
+
+
+
+
+
+
