@@ -70,8 +70,103 @@ Calendar 클래스
   * AM_PM : 오전/오후(0=오전, 1=오후)
 
 
+set()으로 날짜와 시간지정하기
+---------------
+*****
+
+* void set(int field, int value)
+* void set(int year, int month, int date) //년월일
+* void set(int year, int month, int date, int hourOfDay, int minute)
+* void set(int year, int month, int date, int hourOfDay, int minute, int second) /년월일 시분초
 
 
+    Calendar date1 = Calendar.getInstance();
+    date1.set(2017, 7, 15); //2017년 8월 15일(#####7월 아님 주의#####)
+    //또는
+    date1.set(Calendar.YEAR, 2017);
+    date1.set(Calendar.MONTH, 7); //8월
+    date1.set(Calendar.DATE, 15);
+
+    //시간만 지정하는 메서드는 없으므로 필드 하나하나 넣어줘야함.(아니면 3-4번째 set이용)
+    Calendar time1 = Calendar.getInstance();
+    time1.set(Calendar.HOUR_OF_DAY, 10); //10시 20분 30초 설청
+    time1.set(Calendar.MINUTE, 20); 
+    time1.set(Calendar.SECOND, 30); 
+
+
+clear()는 Calendar 객체의 모든 필드를 초기화 한다.
+---------
+*****
+
+
+    Calendar dt = Calendar.getInstance(); //현재시간
+    
+    //오늘 날짜 현재 시간
+    System.out.println(new Date(dt.getTimeInMillis())); //보기편하게 new Date 사용
+
+    dt.clear(); //모든 필드를 초기화
+    //EPOCH TIME
+    //1970년 1월 1일 00:00:00초 초기화된다.
+    System.out.println(new Date(dt.getTimeInMillis()));
+
+
+clear(int field)는 Calendar 객체의 특정 필드를 초기화
+---------
+*****
+
+
+    Calendar dt = Calendar.getInstance(); //현재시간
+    
+    //오늘 날짜 현재 시간
+    System.out.println(new Date(dt.getTimeInMillis())); //보기편하게 new Date 사용
+
+    dt.clear(Calendar.SECOND); //0초로 초기화
+    dt.clear(Calendar.MINUTE); //0분으로 초기화
+    dt.clear(Calendar.HOUR_OF_DAY); //0시로 초기화
+    dt.clear(Calendar.HOUR); //0시로 초기화
+
+
+add()는 특정 필드의 값을 증가 또는 감소(다른 필드에 영향O)
+--------------
+*****
+
+  
+    Calendar date = Calendar.getInstance(); //현재시간
+    date.clear(); //모든 필드를 초기화
+    date.set(2020, 7, 31); //2020년 8월 31일로 설정
+
+    date.add(Calendar.DATE, 1); //날짜 일(DATE)에 1을 더한다. = 9월1일 
+    date.add(Calendar.MONTH, -8); //날짜 월(MONTH)에 8을 뺀다. = 1월1일
+
+
+roll()은 특정필드의 값을 증가 또는 감소(다른 필드에 영향X)
+---------
+*****
+
+    
+    date.set(2020, 7, 31); //2020년 8월 31일로 설정
+
+    date.roll(Calendar.DATE, 1); //날짜 일(DATE)에 1을 더한다. = 8월1일 
+    date.roll(Calendar.MONTH, -8); //날짜 월(MONTH)에 8을 뺀다. = 2020년 12월 31일
+
+
+Date와 Calendar간의 변환
+-----
+*****
+
+* Date의 메서드는 대부분 deprecated(사용하지 않을 것을 권장)되었지만 여전히 사용
+
+
+    //Calendar를 Date로 변환
+    Calendar cal = Calendar.getInstance();
+    ...
+    Date d = new Date(cal.getTimeInMillis()); //Date(long date)
+
+    //Date를 Calendar로 변환
+    Date d = new Date();
+    ...
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(d);
 
 
 
