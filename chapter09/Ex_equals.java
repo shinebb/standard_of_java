@@ -1,4 +1,4 @@
-package chapter08;
+package chapter09;
 
 public class Ex_equals {
     public static void main(String[] args){
