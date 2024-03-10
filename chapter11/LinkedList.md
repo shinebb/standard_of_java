@@ -23,3 +23,21 @@ LinkedList - 배열의 단점을 보완
 * 배열과 달리 링크드 리스트는 불연속적으로 존재하는 데이터를 연결(link)
   * 데이터의 삭제 : 단 한 번의 참조변경만으로 가능
   * 데이터의 추가 : 한번의 Node 객체생성과 두 번의 참조변경만으로 가능
+
+
+LinkedList - 이중 연결 리스트
+--------------
+*****
+
+* 링크드 리스트(linked list) : 연결리스트. 데이터 접근성이 나쁨
+* 더블리 링크드 리스트(doubly linked list) : 이중 연결리스트, 접그성이 향상
+* 더블리 써큘러 링크드 리스트(doubly circular linked list) : 이중 원형 연결리스트
+
+
+ArrayList vs LinkedList - 성능비교
+----------
+*****
+
+* 순차적으로 데이터를 추가/삭제 = ArrayList가 빠름
+* 비순차적으로 데이터를 추가/삭제 = LinkedList가 빠름
+* 접근시간(access time) : ArrayList가 빠름
