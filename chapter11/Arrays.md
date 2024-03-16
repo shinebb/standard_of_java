@@ -45,5 +45,26 @@ sort(), binarySearch()
     int idx = Arrays.binarySearch(arr,2); //idx=2 - 올바른 결과
 
 
+deepToString() - 다차원 배열의 출력
+---------
+*****
 
+
+    int[] arr = {0,1,2,3,4};
+    int[][] arr2D = {{11,12}, {21,22}};
+    
+    System.out.println(Arrays.toString(arr)); // [0,1,2,3,4]
+    System.out.println(Arrays.toString(arr2D)); // [[11,12], [21,22]]
+
+
+deepEquals()
+------------
+*****
+
+
+    String[][] str2D = new String[][]{{"aaa","bbb"},{"AAA","BBB"}};
+    String[][] str2D2 = new String[][]{{"aaa","bbb"},{"AAA","BBB"}};
+
+    System.out.println(Arrays.equals(str2D, str2D2)); // false
+    System.out.println(Arrays.deepEquals(str2D, str2D2)); //true
     
