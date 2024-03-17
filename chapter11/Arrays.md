@@ -68,3 +68,15 @@ deepEquals()
     System.out.println(Arrays.equals(str2D, str2D2)); // false
     System.out.println(Arrays.deepEquals(str2D, str2D2)); //true
     
+
+asList(Object... a) - 배열을 List로 변환
+--------
+*****
+
+    
+    List list = Arrays.asList(new Integer[]{1,2,3,4,5}); //list = [1,2,3,4,5]
+    List list = Arrays.asList(1,2,3,4,5); //list = [1,2,3,4,5]
+    list.add(6);  //UnsupportedOperationException 예외 발생
+
+    List list = new ArrayList(Arrays.asList(1,2,3,4,5)); //변경 가능
+
