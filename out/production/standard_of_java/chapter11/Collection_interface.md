@@ -39,3 +39,19 @@ Iterator
     while(it.hasNext()) { //읽어올 요소가 있는지 확인
         System.out.println(it.next()); 요소 일어오기
     }
+
+
+
+Map과 Iterator
+----------
+*****
+
+* Map에는 iterator()가 없다.
+* Map은 Collection의 자손이 아니기 때문에
+* keySet(), entrySet(), values()를 호출해야 한다.
+
+
+    Map map = new HashMap();
+        ...
+    Iterator it = map.entrySet().iterator();
+
