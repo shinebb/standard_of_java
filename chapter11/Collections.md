@@ -206,10 +206,78 @@ Map 인터페이스 - 순서X, 중복(키X, 값O)
 
 
 
+Collections class
+====================
+
+* 컬렉션을 위한 메서드(static)를 제공
+* 컬렉션 채우기, 복사, 정렬, 검색 - fill(), copy(), sort(), binarySearch() 등
+* 컬렉션의 동기화 - synchronizedXXXX()
+
+
+    static Collection synchronizedCollection(Colleciont c)
+    static List synchronizedList(List list)
+    static Set synchronizedSet(Set s)
+    static Map synchronizedMap(Map m)
+    static SortedSet synchronizedSortedSet(SortedSet s)
+    static SortedMap synchronizedSortedMap(SortedMap m)
+
+
+* 변경불가(readOnly) 컬렉션 만들기 - unmodifiableXXX()
+
+
+    static Collection unmodifiableCollection(Colleciont c)
+    static List unmodifiableList(List list)
+    static Set unmodifiableSet(Set s)
+    static Map unmodifiableMap(Map m)
+    static NavigableSet unmodifiableNavigableSet(NavigableSet s)
+    static SortedSet unmodifiableSortedSet(SortedSet s)
+    static NavigableMap unmodifiableNavigableMap(NavigableMap s)
+    static SortedMap unmodifiableSortedMap(SortedMap m)
+
+
+* 싱글톤 컬렉션 만들기 - singletonXXX() : 객체 한개만 저장할 수 있음
+
+
+    static List singletonList(Object o)
+    static Set singleton(Object o)
+    static Map singletonMap(Object key, Object value)
+
+
+* 한 종류의 객체만 저장하는 컬렉션 만들기() - checkedXXX()
+
+
+    static Collection checkedCollection(Colleciont c, Class type)
+    static List checkedList(List list, Class type)
+    static Set checkedSet(Set s, Class type)
+    static Map checkedMap(Map m, Class keyType, Class valueType)
+    static Queue checkedQueue(Queue queue, Class type)
+    static NavigableSet checkedNavigableSet(NavigableSet s, Class type)
+    static SortedSet checkedSortedSet(SortedSet s, Class type)
+    static NavigableMap checkedNavigableMap(NavigableMap s, Class keyType, Class valueType)
+    static SortedMap checkedSortedMap(SortedMap m, Class keyType, Class valueType)
 
 
 
+컬렉션 클래스 정리 및 요약
+==============
 
 
+* ArrayList / Vector: (Obejct [])을 가지고 있고 여기에 객체를 저장하는 배열 기반의 컬렉션 클래스이다.
+* 이걸 기본으로 만든게 Stack이다 : LIFO 구조를 가지고 있음 (List In Fiast Out)
 
+* 배열의 단점은 추가, 삭제가 불리하다. 
+* 이 단점을 보완한게 LinkedList : 연결기반의 컬렉션 클래스
+* LinkedList를 기반으로 만든게 Queue : FIFO 구조 (First In First Out)
 
+* 검색기능을 향상 시킨 게 HashMap : 배열과 LinkedList를 결합
+* 배열의 장점 + LinkedList의 장점
+* Key, Value를 쌍으로 저장하고 있다.
+
+* TreeMap : 최대 2개까지 연결할 수 있는 트리구조로 되어있다.
+* 검색, 범위검색, 정렬기능 향상
+
+* HashSet / TreeSet : HashMap과 TreeMap의 Key부분을 가지고 만들어짐
+
+* Properties : (String, String) Key와 Value인데 문자열로만 저장 가능.
+
+* LinkedHashMap / LinkedHashSet : HashMap과 HashSet은 순서X이므로, 순서유지가 필요할 때 사용

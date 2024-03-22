@@ -206,9 +206,55 @@ Map 인터페이스 - 순서X, 중복(키X, 값O)
 
 
 
+Collections class
+====================
+
+* 컬렉션을 위한 메서드(static)를 제공
+* 컬렉션 채우기, 복사, 정렬, 검색 - fill(), copy(), sort(), binarySearch() 등
+* 컬렉션의 동기화 - synchronizedXXXX()
 
 
+    static Collection synchronizedCollection(Colleciont c)
+    static List synchronizedList(List list)
+    static Set synchronizedSet(Set s)
+    static Map synchronizedMap(Map m)
+    static SortedSet synchronizedSortedSet(SortedSet s)
+    static SortedMap synchronizedSortedMap(SortedMap m)
 
+
+* 변경불가(readOnly) 컬렉션 만들기 - unmodifiableXXX()
+
+
+    static Collection unmodifiableCollection(Colleciont c)
+    static List unmodifiableList(List list)
+    static Set unmodifiableSet(Set s)
+    static Map unmodifiableMap(Map m)
+    static NavigableSet unmodifiableNavigableSet(NavigableSet s)
+    static SortedSet unmodifiableSortedSet(SortedSet s)
+    static NavigableMap unmodifiableNavigableMap(NavigableMap s)
+    static SortedMap unmodifiableSortedMap(SortedMap m)
+
+
+* 싱글톤 컬렉션 만들기 - singletonXXX() : 객체 한개만 저장할 수 있음
+
+
+    static List singletonList(Object o)
+    static Set singleton(Object o)
+    static Map singletonMap(Object key, Object value)
+
+
+* 한 종류의 객체만 저장하는 컬렉션 만들기() - checkedXXX()
+
+
+    static Collection checkedCollection(Colleciont c, Class type)
+    static List checkedList(List list, Class type)
+    static Set checkedSet(Set s, Class type)
+    static Map checkedMap(Map m, Class keyType, Class valueType)
+    static Queue checkedQueue(Queue queue, Class type)
+    static NavigableSet checkedNavigableSet(NavigableSet s, Class type)
+    static SortedSet checkedSortedSet(SortedSet s, Class type)
+    static NavigableMap checkedNavigableMap(NavigableMap s, Class keyType, Class valueType)
+    static SortedMap checkedSortedMap(SortedMap m, Class keyType, Class valueType)
 
 
 
