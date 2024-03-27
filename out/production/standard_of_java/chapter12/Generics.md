@@ -137,7 +137,27 @@ HashMap<K,V>
     }
 
 
+제한된 제네릭 클래스
+---------
+*****
 
+* extends 로 대입할 수 있는 타입을 제한
+
+
+    class FruitBox<T extends Fruit> { //Fruit(포함)의 자손만 타입으로 지정가능
+        ArrayList<T> list = new ArrayList<T>();
+        ...
+    }
+
+    FruitBox<Apple> appleBox = new FruitBox<Apple>(); //OK
+    FruitBox<Toy> appleBox = new FruitBox<Toy>();     //에러. Toy는 Fruit의 자손이 아님
+
+
+* 인터페이스인 경우에도 extends 를 사용
+
+
+    interface Eatable {}
+    class FruitBox<T extends Detable> {...}
 
 
 
