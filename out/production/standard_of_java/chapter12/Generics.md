@@ -160,6 +160,110 @@ HashMap<K,V>
     class FruitBox<T extends Detable> {...}
 
 
+제네릭스의 제약
+--------
+*****
+
+* 타입 변수에 대입은 인스턴스 별로 다르게 가능
+
+
+    Box<Apple> appleBox = new Box<Apple>(); //OK. Apple 객체만 저장가능
+    Box<Grape> grapeBox = new Box<Grape>(); //OK. Grape 객체만 저장가능
+
+
+* static 멤버에 타입 변수 사용 불가(static은 모든 인스턴스에서 공통으로 쓸 수 있기 때문에)
+
+
+    class Box<T> {
+        static T item; //에러
+        static int compare(T t1, T t2) { ... } //에러
+        ...
+    }
+
+
+* 배열 생성할 때 타입 변수 사용불가. 타입 변수로 배열 선언은 가능
+
+
+    class Box<T> {
+        T[] itemArr; //OK. T타입의 배열을 위한 참조변수
+            ...
+        T[] toArray() {
+            T[] tmpArr = new T[itemArr.length]; //에러. 제네릭 배열 생성 불가
+            ... //new 다음에 'T'가 오면 안된다. new다음에는 확정 객체가 와야한다.
+        }
+    }
+
+
+와일드 카드 <?>
+----------
+*****
+
+* 하나의 참조 변수로 대입된 타입이 다른 객체를 참조 가능
+
+
+    ArrayList<? extends Product> list = new ArrayList<Tv>(); //OK
+    ArrayList<? extends Product> list = new ArrayList<Audio>(); //OK
+    ArrayList<Product> list = new ArrayList<Tv>(); //##에러## 대입된 타입 불일치
+
+    <? extends T> 와일드 카드의 상한 제한. T와 그 자손들만 가능
+    <? super T>   와일드 카드의 하한 제한. T와 그 조상들만 가능
+    <?>           제한 없음. 모든 타입이 가능. <? extends Object>와 동일
+
+
+* 메서드의 매개변수에 와일드 카드를 사용
+
+
+    static Juice makeJuice(FruitBox<? extends Fruit> box) {
+        String tmp = "";
+        for(Fruit f : box.getList()) tmp += f + " ";
+        return new Juice(tmp);
+    }
+
+
+제네릭 메서드
+------
+*****
+
+* 제네릭 타입이 선언된 메서드(타입 변수는 메서드 내에서만 유효)
+
+
+    static <T> void sort(List<T> list, Comparator<? super T> c)
+
+
+* 클래스의 타입 매개변수<T>와 메서드의 타입 매개변수 <T>는 별개
+
+
+    class FruitBox<T> {
+        ...
+        static <T> void sort(List<T> list, Comparator<? super T> c) {
+            ...
+        }
+    }
+
+
+* 메서드를 호출할 때마다 타입을 대입해야(대부분 생략 가능)
+
+
+    FruitBox<Fruit> fruitBox = new FruitBox<Fruit>();
+    FruitBox<Apple> fruitBox = new FruitBox<Apple>();
+        ...
+    System.out.println(Juicer.<Fruit>makeJuice(fruitBox));
+    System.out.println(Juicer.<Apple>makeJuice(appleBox));
+
+
+    static <T extends Fruit> Juice makeJuice(FruitBox<T> box) {
+        String tmp = "";
+        for(Fruit f : box.getList()) tmp += f + " ";
+        return new Juice(tmp);
+    }
+
+
+* 메서드를 호출할 때 타입을 생략하지 않을 때는 클래스 이름 생략 불가
+
+
+    System.out.println(<Fruit>makeJuice(fruitBox)); //##에러## 클래스 이름 생략불가
+    System.out.println(this.<Fruit>makeJuice(fruitBox));   //OK
+    System.out.println(Juicer.<Fruit>makeJuice(fruitBox)); //OK
 
 
 
@@ -168,3 +272,11 @@ HashMap<K,V>
 
 
 
+
+
+
+
+
+
+
+    
