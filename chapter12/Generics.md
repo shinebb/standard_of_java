@@ -266,10 +266,43 @@ HashMap<K,V>
     System.out.println(Juicer.<Fruit>makeJuice(fruitBox)); //OK
 
 
+제네릭 타입의 형변환
+--------
+*****
+
+* 제네릭 타입과 원시 타입 간의 형변환은 바람직 하지 않다. (경고 발생)
 
 
+    Box<Object> objBox = null;
+    Box box = (Box)objBox;     //Ok. 제네릭 타입 -> 원시타입. 경고 발생
+    objBox = (Box<Object>)box; //Ok. 원시 타입 -> 제네릭타입. 경고 발생
+
+    objBox = (Box<Object>)strBox; //##에러## Box<String> -> Box<Object>
+    strBox = (Box<String>)strBox; //##에러## Box<Object> -> Box<String>
 
 
+* 와일드 카드가 사용된 제네릭 타입으로는 형변환 가능
+
+
+    Box<Object>  objBox = (Box<object>)new Box<String>(); //##에러## 형변환 분가능
+    Box<? extends Object> wBox = (Box<? extends Object>)new Box<String>(); //OK
+    Box<? extends Object> wBox = new Box<String>(); //OK. 위문장에서 형변환 코드 생략 가능
+
+    //매개변수로 FruitBox<Fruit>, FruitBox<Apple>, FruitBox<Grape> 등이 가능
+    static Juice makeJuice(FruitBox<? entends Fruit> box) {...}
+
+    FruitBox<? extends Fruit> box = new FruitBox<Fruit>(); //OK
+    FruitBox<? extends Fruit> box = new FruitBox<Apple>(); //OK
+
+
+제네릭 타입의 제거
+---------
+*****
+
+* 컴파일러는 제네릭 타입을 제거하고, 필요한 곳에 형변환을 넣는다.
+1. 제네릭 타입의 경계(bound)를 제거 -> 하위호환성 때문에
+2. 제네릭 타입 제거 후에 타입이 불일치하면, 형변환을 추가
+3. 와일드 카드가 포함된 경우, 적절한 타입으로 형변환 추가
 
 
 
