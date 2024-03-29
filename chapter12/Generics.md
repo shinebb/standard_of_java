@@ -305,6 +305,55 @@ HashMap<K,V>
 3. 와일드 카드가 포함된 경우, 적절한 타입으로 형변환 추가
 
 
+열거형
+--------------
+*****
+
+* 관련된 상수들을 같이 묶어 놓은 것. Java는 타입에 안전한 열거형을 제공
+
+
+    class Card { 
+        enum Kind { CLOVER, HEART, DIAMOND, SPADE } //열거형 Kind를 정의
+        enum Value { TWO, THREE, FOUR }             //열거형 Value를 정의
+
+        final Kind kind; //타입이 int가 아닌 Kind임에 유의하자.
+        final Value value; 
+    }
+
+
+열거형의 정의와 사용
+-------
+*****
+
+* 열거형을 정의하는 방법
+  
+
+    enum 열거형이름 { 상수명1, 상수명2, ... }
+
+
+* 열거형 타입의 변수를 선언하고 사용하는 방법
+
+
+    class Unit {
+        int x, y; //유닛의 위치
+        Direction dir; //열거형 인스턴스 변수를 선언
+
+        void init() { 
+            dir = Direction.EAST; //유닛의 방향을 EAST로초기화
+        }
+    }
+
+
+* 열거형 상수의 비교에 ==와 compareTo() 사용가능
+
+    
+    if(dir==Direction.EAST) {
+        x++;
+    } else if(dir > Direction.WEST) { //에러. 열거형 상수에 비교연산자 사용불가
+        ...
+    } else of(dir.compareTo(Direction.WEST) > 0 ) { //compareTo()는 가능
+
+
 
 
 
