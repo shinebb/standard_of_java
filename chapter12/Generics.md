@@ -354,6 +354,27 @@ HashMap<K,V>
     } else of(dir.compareTo(Direction.WEST) > 0 ) { //compareTo()는 가능
 
 
+열거형의 조상 - java.lang.Enum
+----------
+*****
+
+모든 열거형은 Enum의 자손이며, 아래의 메서드를 상속받는다.
+* Class<E> getDeclaringClass() : 열거형의 Class객체를 반환
+* String name() : 열거형 상수의 이름을 문자열로 반환
+* int ordinal() : 열거형 상수가 정의된 순서를 반환(0부터 시작)
+* T valueOf(Class<T> enumType, String name) : 지정된 열거형에서 name과 일치하는 열거형 상수를 반환
+
+values(), valueOf()는 컴파일러가 자동으로 추가
+
+
+    static E[] values()
+    static E valueOf(String name)
+
+    Direction[] dArr = Direction.values();
+
+    for(Direction d : dArr) 
+        System.out.printf("%s=%d%n", d.name(), d.ordinal());
+
 
 
 
