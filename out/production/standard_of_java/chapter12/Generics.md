@@ -266,11 +266,129 @@ HashMap<K,V>
     System.out.println(Juicer.<Fruit>makeJuice(fruitBox)); //OK
 
 
+제네릭 타입의 형변환
+--------
+*****
+
+* 제네릭 타입과 원시 타입 간의 형변환은 바람직 하지 않다. (경고 발생)
 
 
+    Box<Object> objBox = null;
+    Box box = (Box)objBox;     //Ok. 제네릭 타입 -> 원시타입. 경고 발생
+    objBox = (Box<Object>)box; //Ok. 원시 타입 -> 제네릭타입. 경고 발생
+
+    objBox = (Box<Object>)strBox; //##에러## Box<String> -> Box<Object>
+    strBox = (Box<String>)strBox; //##에러## Box<Object> -> Box<String>
 
 
+* 와일드 카드가 사용된 제네릭 타입으로는 형변환 가능
 
+
+    Box<Object>  objBox = (Box<object>)new Box<String>(); //##에러## 형변환 분가능
+    Box<? extends Object> wBox = (Box<? extends Object>)new Box<String>(); //OK
+    Box<? extends Object> wBox = new Box<String>(); //OK. 위문장에서 형변환 코드 생략 가능
+
+    //매개변수로 FruitBox<Fruit>, FruitBox<Apple>, FruitBox<Grape> 등이 가능
+    static Juice makeJuice(FruitBox<? entends Fruit> box) {...}
+
+    FruitBox<? extends Fruit> box = new FruitBox<Fruit>(); //OK
+    FruitBox<? extends Fruit> box = new FruitBox<Apple>(); //OK
+
+
+제네릭 타입의 제거
+---------
+*****
+
+* 컴파일러는 제네릭 타입을 제거하고, 필요한 곳에 형변환을 넣는다.
+1. 제네릭 타입의 경계(bound)를 제거 -> 하위호환성 때문에
+2. 제네릭 타입 제거 후에 타입이 불일치하면, 형변환을 추가
+3. 와일드 카드가 포함된 경우, 적절한 타입으로 형변환 추가
+
+
+열거형(enum)
+===============================
+
+열거형(enum)
+--------------
+*****
+
+* 관련된 상수들을 같이 묶어 놓은 것. Java는 타입에 안전한 열거형을 제공
+
+
+    class Card { 
+        enum Kind { CLOVER, HEART, DIAMOND, SPADE } //열거형 Kind를 정의 //0,1,2,3
+        enum Value { TWO, THREE, FOUR }             //열거형 Value를 정의
+
+        final Kind kind; //타입이 int가 아닌 Kind임에 유의하자.
+        final Value value; 
+    }
+
+
+* Java의 열거형은 값과 타입을 모두 체크한다.
+
+
+    if(Card.Kind.CLOVER == Card.Value.TWO) { //##컴파일 에러## 타입이 달라서 비교 불가.
+
+
+열거형의 정의와 사용
+-------
+*****
+
+* 열거형을 정의하는 방법
+  
+
+    enum 열거형이름 { 상수명1, 상수명2, ... }
+    
+    enum Direction { EAST, SOUTH, WEST, NORTH }
+
+
+* 열거형 타입의 변수를 선언하고 사용하는 방법
+
+
+    class Unit {
+        int x, y; //유닛의 위치
+        Direction dir; //열거형 인스턴스 변수를 선언
+
+        void init() { 
+            dir = Direction.EAST; //유닛의 방향을 EAST로초기화
+        }
+    }
+
+
+* 열거형 상수의 비교에 ==와 compareTo() 사용가능
+
+    
+    if(dir==Direction.EAST) {  //true
+        x++;
+    } else if(dir > Direction.WEST) { //##에러## 열거형 상수에 비교연산자 사용불가
+        ...
+    } else of(dir.compareTo(Direction.WEST) > 0 ) { //compareTo()는 가능
+        
+    //CompareTo() : 왼쪽크면 양수 / 같으면 0 / 오른쪽이 크면 음수
+
+
+열거형의 조상 - java.lang.Enum
+----------
+*****
+
+모든 열거형은 Enum의 자손이며, 아래의 메서드를 상속받는다.
+
+* Class<E> getDeclaringClass() : 열거형의 Class객체를 반환
+* String name() : 열거형 상수의 이름을 문자열로 반환
+* int ordinal() : 열거형 상수가 정의된 순서를 반환(0부터 시작)
+* T valueOf(Class<T> enumType, String name) : 지정된 열거형에서 name과 일치하는 열거형 상수를 반환
+
+values(), valueOf()는 컴파일러가 자동으로 추가
+
+
+    static E[] values()
+    static E valueOf(String name)
+
+    Direction[] dArr = Direction.values();
+    //Direction d = Direction.valueOf("WEST");
+
+    for(Direction d : dArr) 
+        System.out.printf("%s=%d%n", d.name(), d.ordinal());
 
 
 

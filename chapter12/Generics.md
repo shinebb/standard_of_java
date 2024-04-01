@@ -305,7 +305,10 @@ HashMap<K,V>
 3. 와일드 카드가 포함된 경우, 적절한 타입으로 형변환 추가
 
 
-열거형
+열거형(enum)
+===============================
+
+열거형(enum)
 --------------
 *****
 
@@ -313,12 +316,18 @@ HashMap<K,V>
 
 
     class Card { 
-        enum Kind { CLOVER, HEART, DIAMOND, SPADE } //열거형 Kind를 정의
+        enum Kind { CLOVER, HEART, DIAMOND, SPADE } //열거형 Kind를 정의 //0,1,2,3
         enum Value { TWO, THREE, FOUR }             //열거형 Value를 정의
 
         final Kind kind; //타입이 int가 아닌 Kind임에 유의하자.
         final Value value; 
     }
+
+
+* Java의 열거형은 값과 타입을 모두 체크한다.
+
+
+    if(Card.Kind.CLOVER == Card.Value.TWO) { //##컴파일 에러## 타입이 달라서 비교 불가.
 
 
 열거형의 정의와 사용
@@ -329,6 +338,8 @@ HashMap<K,V>
   
 
     enum 열거형이름 { 상수명1, 상수명2, ... }
+    
+    enum Direction { EAST, SOUTH, WEST, NORTH }
 
 
 * 열거형 타입의 변수를 선언하고 사용하는 방법
@@ -347,11 +358,13 @@ HashMap<K,V>
 * 열거형 상수의 비교에 ==와 compareTo() 사용가능
 
     
-    if(dir==Direction.EAST) {
+    if(dir==Direction.EAST) {  //true
         x++;
-    } else if(dir > Direction.WEST) { //에러. 열거형 상수에 비교연산자 사용불가
+    } else if(dir > Direction.WEST) { //##에러## 열거형 상수에 비교연산자 사용불가
         ...
     } else of(dir.compareTo(Direction.WEST) > 0 ) { //compareTo()는 가능
+        
+    //CompareTo() : 왼쪽크면 양수 / 같으면 0 / 오른쪽이 크면 음수
 
 
 열거형의 조상 - java.lang.Enum
@@ -359,6 +372,7 @@ HashMap<K,V>
 *****
 
 모든 열거형은 Enum의 자손이며, 아래의 메서드를 상속받는다.
+
 * Class<E> getDeclaringClass() : 열거형의 Class객체를 반환
 * String name() : 열거형 상수의 이름을 문자열로 반환
 * int ordinal() : 열거형 상수가 정의된 순서를 반환(0부터 시작)
@@ -371,6 +385,7 @@ values(), valueOf()는 컴파일러가 자동으로 추가
     static E valueOf(String name)
 
     Direction[] dArr = Direction.values();
+    //Direction d = Direction.valueOf("WEST");
 
     for(Direction d : dArr) 
         System.out.printf("%s=%d%n", d.name(), d.ordinal());
