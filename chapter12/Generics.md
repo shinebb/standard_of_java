@@ -391,7 +391,35 @@ values(), valueOf()는 컴파일러가 자동으로 추가
         System.out.printf("%s=%d%n", d.name(), d.ordinal());
 
 
+열거형에 멤버 추가하기
+-------------
+*****
 
+* 불연속적인 열거형 상수의 경우, 원하는 값을 괄호()안에 적는다.
+
+
+    enum Direction { EAST(1), SOUTH(5), WEST(-1), NORTH(10) }
+
+
+* 괄호()를 사용하려면, 인스턴스 변수와 생성자를 새로 추가해 줘야한다.
+
+
+    enum Direction {
+        EAST(1), SOUTH(5), WEST(-1), NORTH(10); //끝에 ';'를 추가해야 한다.
+        
+        //값을 저장할 iv 변수를 선언 및 생성자를 정의해줘야 값을 저장할 수 있다.
+        private final int value; //정수를 저장할 필드(인스턴스 변수)를 추가
+        Direction(int value) { this.value = value; } //생성자를 추가
+        //생성자는 항시적으로 private 이므로, 생략되어있음
+        
+        public int getValue() { return value; }
+    }
+
+
+* 열거형의 생성자는 묵시적으로 private 이므로, 외부에서 객체생성 불가
+
+
+    Direction d = new Direction(1); //##에러## 열거형의 생성자는 외부에서 호출불가
 
 
 
