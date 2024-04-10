@@ -185,4 +185,30 @@ main 스레드
 * 멀티스레드 일 때 blocking : 사용자로부터 입력을 기다리는 구간동안 다른 스레드가 수행된다.
 
 
+스레드의 우선순위(priority of thread)
+----------
+*****
+
+* 작업의 중요도에 따라 스레드의 우선순위를 다르게 하여 특정 스레드가 더 많은 작업시간을 갖게 할 수 있다.
+
+
+    void setPriority(int newPriority) //스레드의 우선순위를 지정한 값으로 변경한다.
+    int getPriotiry(); //스레드의 우선순위를 반환한다.
+
+    public static final int MAX_PRIOTITY = 10; //최대우선순위
+    public static final int MIN_PRIOTITY = 1; //최소우선순위
+    public static final int NORM_PRIOTITY = 5; //보통우선순위
+
+
+스레드 그룹
+---------
+*****
+
+* 서로 관련된 스레드를 그룹으로 묶어서 다루기 위한 것
+* 모든 스레드는 반드기 하나의 스레드 그룹에 포함되어 있어야 한다.
+* 스레드 그룹을 지정하지 않고 생성한 스레드는 'main 스레드 그룹'에 속한다.
+* 자신을 생성한 스레드(부모 스레드)의 그룹과 우선순위를 상속받는다.
+
+
+
 
