@@ -210,5 +210,56 @@ main 스레드
 * 자신을 생성한 스레드(부모 스레드)의 그룹과 우선순위를 상속받는다.
 
 
+데몬 스레드(daemon thread)
+--------
+*****
+
+* 일반 스레드(non-daemon thread)의 작업을 돕는 보조적인 역할을 수행
+* 일반 스레드가 모두 종료되면 자동적으로 종료된다.
+* 가비지 컬렉터(GC), 자동저장, 화면 자동갱신 등에 사용된다.
+* 무한루프와 조건문을 이용해서 실행 후 대기하다가 특정조건이 만족되면 작업을 수행하고 다시 대기하도록 작성한다.
 
 
+    boolean isDaemon() -  스레드가 데몬 스레드인지 확인한다. 데몬 스레드이면 true를 반환
+    void setDaemon(boolean on) - 스레드를 데몬 스레드로 또는 사용자 스레드로 변경. 매개변수 on을 true로 지정하면 데몬 스레드가 된다.
+
+* setDaemon(boolean on)은 반드시 start()를 호출하기 전에 실행되어야 한다.
+* 그렇지 않으면 IllegalThreadStateException 이 발생한다.
+
+
+스레드의 상태
+-----------
+*****
+
+* NEW : 스레드가 생성되고 아직 start()가 호출되지 않은 상태
+* RUNNABLE : 실행 중 또는 실행 가능한 상태
+* BLOCKED : 동기화 블럭에 의해서 일시정지된 상태(lock이 풀릴 때까지 기다리는 상태)
+* WAITING, TIMED_WAITING : 스레드의 작업이 종료되지는 않았지만 실행가능하지 않은(unRunnable) 일시정지상태.
+    TIMED_WAITING 은 일시정지시간이 지정된 경우를 의미
+* TERMINATED : 스레드의 작업이 종료된 상태
+
+
+* 잠시 정지되는 상태 : suspend()(일시정지), sleep()(쉼), wait(), join()(기다리기), I/O block(입출력 대기)
+* 다시 재개 : resume()(재개), time-out(시간종료), notify(), interrupt()
+
+
+스레드의 실행제어
+-----------
+*****
+
+* 스레드의 실행을 제어할 수 있는 메서드가 제공된다.
+
+
+* static void sleep(long millis) / (long millis, int nanos) : 지정된 시간(천분의 일초 단위) 동안
+    스레드를 일시정지(잠들게) 시킨다. 지정한 시간이 지나고 나면, 자동적으로 다시 실행대기상태가 된다.
+* void join() / (long millis) / (long millis, int nanos) : 지정된 시간동안 스레드가 실행되도록 한다.
+    지정된 시간이 자나거나 작업이 종료되면 join()을 호출한 스레드로 다시 돌아와 실행을 계속한다.
+* void interrupt() : Sleep()이나 join()에 의해 일시정지상태인 스레드를 깨워서 실행대기상태로 만든다.
+    해당 스레드에서는 Interrupted Exception이 발생함으로써 일시정지 상태를 벗어나게 된다.
+* void stop() : 스레드를 즉시 종료시킨다.
+* void suspend() : 스레드를 일시정시시킨다. resume()을 호출하면 다시 실행대기상태가 된다.
+* void resume() : suspend()에 의해 일시정지상태에 있는 스레드를 실행대기상태로 만든다.
+* static void yield() : 실행 중에 자신에게 주어진 실행시간을 다른 스레드에게 양보(yield)하고 자신은 실행대기상태가 된다.
+
+
+* static이 붙은 sleep()과 yield() : 스레드 자기 자신에게만 호출 가능. (내가 sleep()할 수는 있어도 다른 스레드를 sleep()시킬 순 없다.)
