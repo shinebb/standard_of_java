@@ -263,3 +263,42 @@ main 스레드
 
 
 * static이 붙은 sleep()과 yield() : 스레드 자기 자신에게만 호출 가능. (내가 sleep()할 수는 있어도 다른 스레드를 sleep()시킬 순 없다.)
+
+
+sleep()
+----------
+*****
+
+* 현재 스레드를 지정된 시간동안 멈추게 한다.
+* static 메서드로 '현재 스레드(자기자신)'에 적용된다.
+
+
+    static void sleep(long millis) //천분의 일초 단위(3 * 1000 = 3초)
+    static void sleep(long millis, int nanos) //천분의 일초 + 나노초
+
+
+* 예외처리를 해야 한다. (InterruptedException 이 발생하면 깨어남)
+
+
+    try {
+        Thread.sleep(1, 500000);  //스레드를 0.0015초 동안 멈추게 한다.
+    } catch(InterrptedException e) {}
+
+
+* sleep() 상태의 스레드를 깨우는 경우 2가지 : time up(시간종료), interrupt(깨움)
+* 누가 깨우면 throw new InterruptedException 예외를 던짐
+* 매번 예외처리하기 불편하므로 보통 메서드를 하나 만들어서 사용한다.
+
+
+    void delay(long millis) {
+        try {
+            Thread.sleep(1, 500000);  //스레드를 0.0015초 동안 멈추게 한다.
+        } catch(InterrptedException e) {}
+    }
+
+    delay(15);
+
+
+* 특정 스레드를 지정해서 멈추게 하는 것은 불가능하다.
+
+    

@@ -227,6 +227,78 @@ main 스레드
 * 그렇지 않으면 IllegalThreadStateException 이 발생한다.
 
 
+스레드의 상태
+-----------
+*****
+
+* NEW : 스레드가 생성되고 아직 start()가 호출되지 않은 상태
+* RUNNABLE : 실행 중 또는 실행 가능한 상태
+* BLOCKED : 동기화 블럭에 의해서 일시정지된 상태(lock이 풀릴 때까지 기다리는 상태)
+* WAITING, TIMED_WAITING : 스레드의 작업이 종료되지는 않았지만 실행가능하지 않은(unRunnable) 일시정지상태.
+    TIMED_WAITING 은 일시정지시간이 지정된 경우를 의미
+* TERMINATED : 스레드의 작업이 종료된 상태
 
 
+* 잠시 정지되는 상태 : suspend()(일시정지), sleep()(쉼), wait(), join()(기다리기), I/O block(입출력 대기)
+* 다시 재개 : resume()(재개), time-out(시간종료), notify(), interrupt()
 
+
+스레드의 실행제어
+-----------
+*****
+
+* 스레드의 실행을 제어할 수 있는 메서드가 제공된다.
+
+
+* static void sleep(long millis) / (long millis, int nanos) : 지정된 시간(천분의 일초 단위) 동안
+    스레드를 일시정지(잠들게) 시킨다. 지정한 시간이 지나고 나면, 자동적으로 다시 실행대기상태가 된다.
+* void join() / (long millis) / (long millis, int nanos) : 지정된 시간동안 스레드가 실행되도록 한다.
+    지정된 시간이 자나거나 작업이 종료되면 join()을 호출한 스레드로 다시 돌아와 실행을 계속한다.
+* void interrupt() : Sleep()이나 join()에 의해 일시정지상태인 스레드를 깨워서 실행대기상태로 만든다.
+    해당 스레드에서는 Interrupted Exception이 발생함으로써 일시정지 상태를 벗어나게 된다.
+* void stop() : 스레드를 즉시 종료시킨다.
+* void suspend() : 스레드를 일시정시시킨다. resume()을 호출하면 다시 실행대기상태가 된다.
+* void resume() : suspend()에 의해 일시정지상태에 있는 스레드를 실행대기상태로 만든다.
+* static void yield() : 실행 중에 자신에게 주어진 실행시간을 다른 스레드에게 양보(yield)하고 자신은 실행대기상태가 된다.
+
+
+* static이 붙은 sleep()과 yield() : 스레드 자기 자신에게만 호출 가능. (내가 sleep()할 수는 있어도 다른 스레드를 sleep()시킬 순 없다.)
+
+
+sleep()
+----------
+*****
+
+* 현재 스레드를 지정된 시간동안 멈추게 한다.
+* static 메서드로 '현재 스레드(자기자신)'에 적용된다.
+
+
+    static void sleep(long millis) //천분의 일초 단위(3 * 1000 = 3초)
+    static void sleep(long millis, int nanos) //천분의 일초 + 나노초
+
+
+* 예외처리를 해야 한다. (InterruptedException 이 발생하면 깨어남)
+
+
+    try {
+        Thread.sleep(1, 500000);  //스레드를 0.0015초 동안 멈추게 한다.
+    } catch(InterrptedException e) {}
+
+
+* sleep() 상태의 스레드를 깨우는 경우 2가지 : time up(시간종료), interrupt(깨움)
+* 누가 깨우면 throw new InterruptedException 예외를 던짐
+* 매번 예외처리하기 불편하므로 보통 메서드를 하나 만들어서 사용한다.
+
+
+    void delay(long millis) {
+        try {
+            Thread.sleep(1, 500000);  //스레드를 0.0015초 동안 멈추게 한다.
+        } catch(InterrptedException e) {}
+    }
+
+    delay(15);
+
+
+* 특정 스레드를 지정해서 멈추게 하는 것은 불가능하다.
+
+    
