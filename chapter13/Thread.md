@@ -301,4 +301,18 @@ sleep()
 
 * 특정 스레드를 지정해서 멈추게 하는 것은 불가능하다.
 
+
+interrupt()
+----------
+*****
+
+* 대기상태(WAITING)인 스레드를 실행대기 상태(RUNNABLE)로 만든다.
+
+
+    void interrupt()  //스레드의 intrrupted 상태를 false에서 true로 변경
+    boolean isInterrupted() //스레드의 interrpted 상태를 반환
+    static boolean interrupted() //현재 스레드의 interrupted 상태를 알려주고, false로 초기화
+
+
+
     
