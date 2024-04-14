@@ -314,5 +314,35 @@ interrupt()
     static boolean interrupted() //현재 스레드의 interrupted 상태를 알려주고, false로 초기화
 
 
+suspend(), resume(), stop()
+------------
+*****
 
+* 쓰레드의 실행을 일시정지, 재개, 완전정지 시킨다.
+    
+    
+    void suspend()  //스레드를 일시정지 시킨다.
+    void resume()   //suspend()에 의해 일시정지된 스레드를 실행대기상태로 만든다.
+    void stop()     //스레드를 즉시 종료 시킨다.
+
+
+* 그러나 이 메서드들은 교착상태에 빠지기 쉬워서 deprecated(사용권장X)되었다.
+* 그래서 직접 만들어서 사용하면 된다.
+
+
+    class Thred implements Runnable {
+        boolean suspended = false;
+        boolean stopped = false;
+
+        public void run() {
+            while(!stopped) {
+                if(!suspended) {
+                    /* 스레드가 수행할 코드를 작성*/
+                }
+            }
+        }
+    }
+    public void suspend() { sespended = true; }
+    public void resume() { sespended = false; }
+    public void stop() { stopped = true; }
     
