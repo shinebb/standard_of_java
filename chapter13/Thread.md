@@ -346,3 +346,18 @@ suspend(), resume(), stop()
     public void resume() { sespended = false; }
     public void stop() { stopped = true; }
     
+
+join()
+---------------
+*****
+
+* 지정된 시간동안 특정 스레드가 작업하는 것을 기다린다.
+
+
+    void join()                       //작업이 모두 끝날 때까지
+    void join(long millis)            //천분의 일초 동안
+    void join(long millis, int nanos) //천분의 일초 + 나노초 동안
+
+
+* 예외처리를 해야한다. (InterruptedException이 발생하면 작업 재개)
+
