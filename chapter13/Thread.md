@@ -370,3 +370,69 @@ yield()
 * static 메서드이기때문에 자시 자신만 사용 가능
 * yield()와 interrupt()를 적절히 사용하면, 응답성과 효율을 높일 수 있다.
 
+
+스레드의 동기화(synchronization)
+--------------
+*****
+
+* 멀티 스레드 프로세스에서는 다른 스레드의 작업에 영향을 미칠 수 있다.
+* 진행중인 작업이 다른 스레드에게 간섭받지 않게 하려면 '동기화(synchronization)'가 필요
+
+
+    스레드의 동기화 - 한 스레드가 진행중인 작업을 다른 스레드가 간섭하지 못하게 막는 것
+
+
+* 동기화하려면 간섭받지 않아야 하는 문장들을 '임계 영역'으로 설정
+* 임계영역은 락(lock)을 얻는 단 하나의 스레드만 출입가능(객체 1개에 락 1개)
+
+
+synchronized 를 이용한 동기화
+---------------
+*****
+
+* synchronized로 임계영역(lock이 걸리는 영역)을 설정하는 방법 2가지
+
+1. 메서드 전체를 임계영역으로 지정
+
+
+    public synchronized void calcSum() { //임계영역
+        //...
+    }
+
+
+2. 특정한 영역을 임계 영역으로 지정
+
+    
+    synchronized(객체의 참조변수) {
+        //...
+    }
+
+
+* 임계 영역이 많을수록 성능이 떨어짐. 1번보다 2번을 권장
+
+1번 예시
+
+
+    public synchronized void withdraw(int money) {
+        if(balance >= money) {
+            try {
+                Thread.sleep(1000);
+            }catch(Exception a) {}
+            balance -= money;
+        }
+    }
+
+
+2번 예시
+
+
+    public void withdraw(int money) {
+        synchronized(this) {
+            if(balance >= money) {
+            try {
+                Thread.sleep(1000);
+            }catch(Exception a) {}
+                balance -= money;
+            }
+        }
+    }
