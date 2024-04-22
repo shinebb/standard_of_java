@@ -436,3 +436,37 @@ synchronized 를 이용한 동기화
             }
         }
     }
+
+
+wait(), notify()
+-----------
+*****
+
+* 동기화의 단점 : 비효율적 <- 한번에 한 스레드만 임계영역에 들어갈 수 있기 때문에
+* 동기화의 효율을 높이기 위해 wait(), notify()를 사용
+* Object 클래스에 정의되어 있으며, 동기화 블록 내에서만 사용할 수 있따.
+
+
+* wait() : 객체의 lock을 풀고 스레드를 해당 객체의 waiting pool에 넣는다.
+* notify() : waiting pool에서 대기중인 스레드 중 하나를 깨운다.
+* notifyAll() : waiting pool에서 대기중인 모든 스레드를 꺠운다.
+
+
+    class Account {
+        int balance = 1000;
+
+        public synchronized void withdraw(int money) {
+            while(balance < money) {
+                try {
+                    wait(); //대기 - 락을 풀고 기다린다. 통지를 받으면 락을 재획득(ReEntrance)
+                } catch(interruptedException e) {}
+            }
+            balance -= money;
+        }
+        
+        public syncronized void deposit(int money) {
+            balance += money;
+            notify(); //통지 - 대기중인 스레드 중 하나에게 알림.
+        }
+    }
+
