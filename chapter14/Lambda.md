@@ -36,5 +36,34 @@
 3. 단, 하나뿐인 문장이 return 문이면 괄호{} 생략불가
 
 
+람다식의 예
+---------
+*****
 
+
+    int printVar(String name, int i) {
+        System.out.println(name+"="+i);
+    }
   
+    =>
+
+    (name, i) -> System.out.println(name+"="+i)
+
+---------
+
+    int square(int x) {
+        return x * x;
+    }
+
+    =>
+
+    x -> x*x
+    //매변수가 하나라면 ()괄호 생략 가능
+
+
+람다식은 익명 함수? 익명 객체!
+----------
+*****
+
+* 람다식은 익명 함수가 아니라 익명 객체이다.
+* 람다식(익명 객체)을 다루기 위한 참조변수가 필요. 참조변수의 타입은? 
