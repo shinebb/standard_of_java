@@ -99,3 +99,24 @@
     int value = f.max(3,5); //실제로는 람다식(익명 함수)이 호출됨
 
 
+함수형 인터페이스 - example
+----------
+*****
+
+* 익명 객체를 람다식으로 대체
+
+
+    List<String> list = Arrays.asList("abc","aaa","bbb","ddd","aaa");
+    Collections.sort(lsit, new Comparator<String> () {
+                      public int compare(String s1, String s2) {
+                          return s2.compareTo(s1);
+                      }
+                });
+
+    =>
+
+    interface Comparator<T> {
+        int compare(T o1, T o2);
+    }
+
+    Collections.sort(list, (s1, s2) -> s2.compareTo(s1);
