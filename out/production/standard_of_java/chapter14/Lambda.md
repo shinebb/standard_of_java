@@ -99,3 +99,63 @@
     int value = f.max(3,5); //실제로는 람다식(익명 함수)이 호출됨
 
 
+함수형 인터페이스 - example
+----------
+*****
+
+* 익명 객체를 람다식으로 대체
+
+
+    List<String> list = Arrays.asList("abc","aaa","bbb","ddd","aaa");
+    Collections.sort(lsit, new Comparator<String> () {
+                      public int compare(String s1, String s2) {
+                          return s2.compareTo(s1);
+                      }
+                });
+
+=>
+
+    interface Comparator<T> {
+        int compare(T o1, T o2);
+    }
+
+    List<String> list = Arrays.asList("abc","aaa","bbb","ddd","aaa");
+    Collections.sort(list, (s1, s2) -> s2.compareTo(s1);
+
+
+함수형 인터페이스 타입의 매개변수, 반환타입
+----------
+*****
+
+* 함수형 인터페이스 타입의 매개변수
+
+
+    void aMethod(MyFunction f) {
+        f.myMethod(); //MyFunction에 정의된 메서드 호출, 람다식 호출
+    }
+
+
+    @FunctionalInterface
+    interface MyFunction<T> {
+        void myMethod();
+    }
+
+    MyFunction f = () -> System.out.println("myMethod()");
+    aMethod(f);
+
+
+    a.Method(() -> System.out.println("myMethod()"); //더 간단
+
+
+* 함수형 인터페이스 타입의 반환타입
+
+
+    MyFunction myMethod() {
+        MyFunction f = () -> {};
+        return f;
+    }
+
+    MyFunction myMethod() {
+        return () -> {};
+    } //더 간단
+    
