@@ -41,3 +41,43 @@ Predicate\<T> : 조건식
     if(isEmptyStr.test(s)) // if(s.length() == 0)
         System.out.println("This is an empty String.");
     }
+
+
+Quiz
+-------
+*****
+
+* Supplier<Integer> f = () -> (int)(Math.random()*100)+1;
+: 반환값만 있기 때문에 공급자 = Supplier
+
+* Consumer<Integer> f = i -> System.out.print(i + ", ");
+: 매개변수는 있지만 반환값은 없기 때문에 소비자 = Consumer
+
+* Predicate<Integer> f = i -> i%2 == 0;
+: 조건식 = Predicate
+: 원래는 Predicate<Integer, Boolean>이라고 써야하지만 반환타입이 항상 Boolean 이기 때문에 Boolean은 쓰지 않는다.
+
+* Function<Integer,Integer> f = i -> i/10*20;
+: 입력값도 있고 출력값도 있는 함수 = Function
+
+
+매개변수가 2개인 함수형 인터페이스
+=================
+
+BiConsumer\<T, U>
+------------
+*****
+
+* void accept(T t, U u) : 두 개의 매개변수만 있고, 반환값이 없음
+
+BiPredicate\<T,U>
+------------
+*****
+
+* boolean test(T t, U u) : 조건식을 표현하는데 사용됨. 매개변수는 둘, 반환값은 boolean
+
+BiFunction\<T,U,R>
+------------
+*****
+
+* R apply(T t, U u) : 두 개의 매개변수를 받아서 하나의 결과를 반환
