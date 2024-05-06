@@ -112,4 +112,32 @@ BinaryOperator\<T>
 
 
 
+Predicate(조건식)의 결합
+---------------
+*****
+
+* and(), or(), negate()(not)로 두 Predicate를 하나로 결합(default 메서드)
+
+
+    Predicate<Integer> p = i -> i<100;
+    Predicate<Integer> q = i -> i<200;
+    Predicate<Integer> r = i -> i%2 == 0;
+
+    Predicate<Integer> notP = p.negate(); //i >= 100
+    Predicate<Integer> all = notP.and(q).or(r); //100<=i && i<200 || i%2==0
+    Predicate<Integer> all2 = notP.and(q.or(r)); //100<=i && (i<200 || i%2==0)
+
+    System.out.println(all.test(2)); //true
+    System.out.println(all2.test(2)); //false
+
+
+* 등가비교를 위한 Predicate의 작성에는 isEqual()를 사용(static 메서드)
+
+
+    Predicate<String> p = Predicate.isEqual(str1); //isEqual()은 static메서드
+    Boolean result = p.test(str2); //str1과 str2가 같은지 비교한 결과를 반환
+
+    boolean result = Predicate.isEqual(str1).test(str2);
+    //str1.equals(str2)랑 같다.
+
 
