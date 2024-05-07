@@ -140,3 +140,37 @@ Predicate(조건식)의 결합
     boolean result = Predicate.isEqual(str1).test(str2);
     //str1.equals(str2)랑 같다.
 
+
+
+컬렉션 프레임워크와 함수형 인터페이스
+===============
+
+함수형 인터페이스를 사용하는 컬렉션 프레임워크의 메서드(와일드 카드 생략)
+--------
+*****
+
+Collection
+* boolean removeIf(Predicate<E> filter) : 조건에 맞는 요소를 삭제
+
+List
+* void replaceAll(UnaryOperator<E> operator) : 모든 요소를 변환하여 대체
+
+Iterable
+* void forEach(Consumer<T> action) : 모든 요소에 작업 action을 수행
+
+Map
+* V compute(K key, BiFunction<K,V,V> f) : 지정된 키의 값에 작업 f를 수행
+* V computeIfAbsent(K key, Function<K,V> f) : 키가 없으면, 작업 f 수행 후 추가
+* V computeIfPresent(K key, BiFunction<K,V,V> f) : 지정된 키가 있을 때, 작업 f 수행
+* V merge(K key, V value, BiFunction<V,V,V> f) : 모든 요소에 병합작업 f를 수행
+* void forEach(BiConsumer<K,V> action) : 모든 요소에 작업 action을 수행
+* void replaceAll(BiFunction<K,V,V> f) : 모든 요소에 치환작업 f를 수행
+
+
+    list.forEach(i->System.out.print(i+",")); //list의 모든 요소를 출력
+    list.removeIf(x->x%2==0 || x%3==0); //2 또는 3의 배수를 제거
+    list.replaceAll(i->i*10);
+    //map의 모든 요소를 {k,v}의 형식으로 출력
+    map.forEach((k,v) -> System.out.print("{"+k+","+v+"}"));
+
+
