@@ -174,3 +174,56 @@ Map
     map.forEach((k,v) -> System.out.print("{"+k+","+v+"}"));
 
 
+메서드 참조
+==============
+
+하나의 메서드만 호출하는 람다식은 '메서드 참조'로 더 간단히 할 수 있다.
+--------
+*****
+
+* static 메서드 참조 : (x) -> ClassName.method(x) : ClassName::method
+* 인스턴스메서드 참조 : (obj, x) -> obj.method(x) : ClassName::method
+* (XXX 이건 잘 안씀 XXX) 특정 객체 인스턴스 메서드 참조 : (x) -> obj.method(x) : obj::method
+
+
+static 메서드 참조
+------
+*****
+
+
+    Integer method(String s) {  //그저 Integer.parseInt(String s)만 호출
+        return Integer.parseInt(s); 
+    }
+
+    int result = Integer.parseInt("123");
+
+
+=>
+
+    Function<String, Integer> f = (String s) -> Integer.parseInt(s);
+
+=>
+
+    
+    Function<String, Integer> f = Integer::parseInt; //메서드 참조
+
+
+생성자의 메서드 참조
+===========
+
+생성자와 메서드 참조
+----------
+****
+
+* Supplier<MyClass> s = () -> new MyClass();
+* Supplier<MyClass> s = MyClass::new;
+* Function<Integer, MyClass> s = (i) -> new MyClass(i);
+* Function<Integer, MyClass> s = MyClass::new;
+
+배열과 메서드 참조
+----------
+*****
+
+* Function<Integer, int[]> f = x -> new int[x]; //람다식
+* Function<Integer, int[]> f2 = int[]::new;     //메서드 참조
+
