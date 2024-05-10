@@ -41,3 +41,33 @@ forEach(System.out::println) : 출력
     Stream<String> limitedStream = stream.limit(5); //스트림 자르기(중간 연산)
     int total = stream.count(); //요소 개수 세기(최종연산)
 
+
+스트림(Stream)의 특징
+------------
+*****
+
+* 스트림은 데이터 소스로부터 데이터를 읽기만할 뿐 변경하지 않는다.
+
+
+    List<Integer> list = Arrays.asList(3,1,5,4,2);
+    List<Integer> sortedList = list.stream().sorted().collect(Collectors.toList());
+    //list를 정렬해서 새로운 List에 저장
+
+    System.out.println(list);       //[3,1,5,4,2]
+    System.out.println(sortedList); //[1,2,3,4,5]
+
+
+* 스트림은 Iterator 처럼 일회용이다.(필요하면 다시 스트림을 생성해야 함)
+
+
+    strStream.forEach(System.out::println); //모든 요소를 화면에 출력(최종연산)
+    int numOfStr = strStream.count();       //에러. 스트림이 이미 닫혔음.
+
+
+* 최종 연산 전까지 중간연산이 수행되지 않는다. - 지연된 연산
+
+
+    IntStream intStream = new Random().ints(1,46); //1~45 범위의 무한 스트림
+    intStream.distinct().limit(6).sorted()         //중간연산
+            .forEach(i->System.out.print(i+","));  //최종연산
+    //코드는 말이 안되나, 지연된 연산을 처리하기 때문에 가능하다.
