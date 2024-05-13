@@ -71,3 +71,28 @@ forEach(System.out::println) : 출력
     intStream.distinct().limit(6).sorted()         //중간연산
             .forEach(i->System.out.print(i+","));  //최종연산
     //코드는 말이 안되나, 지연된 연산을 처리하기 때문에 가능하다.
+
+
+* 스트림은 작업을 내부 반복으로 처리한다.
+
+
+    for(String str : strList) {
+        System.out.println(str);
+    }
+->
+
+    stream.forEach(System.out::println);
+
+
+* 스트림의 작업을 병렬로 처리 - 병렬스트림
+
+
+    Stream<String> strStream = Stream.of("dd","aaa","CC","cc","b");
+    int sum = str.Stream.parallel() //병렬스트림으로 전환(속석만 변경)
+                        .mapToInt(s -> s.length()).sum(); //모든 문자열의 길이의 합
+
+
+* 기본형 스트림 - IntStream, LongStream, DoubleStream
+  * 오토박싱&언박싱의 비효율이 제거됨(Stream<Integer> 대신 IntStream 사용)
+  * 숫자와 관련된 유용한 메서드를 Stream<T>보다 더 많이 제공
+
