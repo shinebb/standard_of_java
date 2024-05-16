@@ -98,7 +98,8 @@ forEach(System.out::println) : 출력
 
 
 스트림 만들기 - 컬렉션
-==========================
+----------------
+*****
 
 * Collection 인터페이스의 stream()으로 컬렉션을 스트림으로 변환
 
@@ -112,4 +113,32 @@ forEach(System.out::println) : 출력
     //스트림의 모든 요소를 출력
     intStream.forEach(System.out::print); //12345
     intStream.forEach(System.out::print); //에러. 스트림이 이미 닫혔다.
+
+
+스트림 만들기 - 배열
+--------------
+*****
+
+* 객체 배열로부터 스트림 생성하기
+
+
+    Stream<T> Stream.of(T... values) //가변 인자
+    Stream<T> Stream.of(T[])
+    Stream<T> Arrays.stream(T[])
+    Stream<T> Arrays.stream(T[] array, int startInclusive, int endExclusive)
+
+    Stream<String> str Stream = Stream.of("a","b","c"); //가변인자
+    Stream<String> str Stream = Stream.of(new String[]{"a","b","c"});
+    Stream<String> str Stream = Arrays.Stream(new String[]{"a","b","c"});
+    Stream<String> str Stream = Arrays.Stream(new String[]{"a","b","c"},0,3);
+
+
+* 기본형 배열로부터 스트림 생성하기
+
+    
+    IntStream InsStream.of(int... values)  //Stream이 아니라 IntStream
+    IntStream InsStream.of(int[])  
+    IntStream Arrays.Stream(int[])  
+    IntStream Arrays.Stream(int[] array, int startInclusive, int endExclusive)  
+    
 
