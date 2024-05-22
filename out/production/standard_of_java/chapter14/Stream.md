@@ -210,4 +210,205 @@ forEach(System.out::println) : 출력
     Stream<Integer> oneStream = Stream.generate(()->1);
 
 
+스트림 만들기 - 파일과 빈 스트림
+--------
+*****
+
+* 파일을 소스로 하는 스트림 만들기
+
+
+    Stream<Path> Files.list(Path.dir)  //Path는 파일 또는 디렉토리
+
+
+    Stream<String> Files.lines(Path path) //파일 내용을 라인 단위로 읽어서 Stream<String>으로 만든다.
+    Stream<String> Files.lines(Path path, Charset cs)
+    Stream<String> lines()  //BufferedReader 클래스의 메서드 
+    
+
+스트림의 연산
+========================
+
+스트림이 제공하는 기능 - 중간 연산과 최종 연산
+--------
+*****
+
+* 중간 연산 - 연산결과가 스트림인 연산. 반복적으로 적용가능
+* 최종 연산 - 연산결과가 스트림이 아닌 연산. 단 한번만 적용가능(스트림의 요소를 소모)
+
+
+    stream.distinct().limit(5).sorted().forEach(System.out::println)
+    //.distinct().limit(5).sorted() -> 중간연산
+    //.forEach(System.out::println) -> 최종연산
+
+
+    String[] strArr = {"dd","aaa","CC","cc","b"};
+    Stream<String> stream = Stream.of(strArr); //문자열 배열이 소스인 스트림
+    Stream<String> filteredStream = stream.filter(); //걸러내기(중간 연산)
+    Stream<String> distinctedStram = stream.distinct(); //중복제거(중간 연산)
+    Stream<String> sortedStream = stream.sort(); //정렬(중간 연산)
+    Stream<String> limitedStream = stream.limit(5); //스트림 자르기(중간 연산)
+    int total = stream.count(); //요소 개수 세기(최종연산)
+
+
+스트림의 연산 - 중간 연산
+------------
+*****
+
+* Stream<T> distinct() : 중복을 제거
+* Stream<T> filter(Predicate<T> predicate) : 조건에 안 맞는 요소 제거
+* Stream<T> limit(long maxSize) : 스트림의 일부를 잘라낸다.
+* Stream<T> skip(long n) : 스트림의 일부를 건너뛴다.
+* Stream<T> peek(Consumer<T> action) : 스트림의 요소에 작업수행
+* Stream<T> sorted(), sorted(Comparator<T> comparator) : 스트림의 요소를 정렬한다.
+
+
+* 스트림의 요소를 변환한다.
+* Stream<R> map(Function<T,R> mapper)
+* DoubleStream mapToDouble(ToDoubleFunction<T> mapper)
+* IntStream mapToInt(ToIntFunction<T> mapper)
+* LongStream mapToLong(ToLongFunction<T> mapper)
+
+* Stream<R> flatMap(Function<T,Stream<R>> mapper)
+* DoubleStream flatMapToDouble(Function<T,DoubleStream> m)
+* IntStream flatMapToInt(Function<T,intStream> m)
+* LongStream flatMapLong(Function<T,LongStream> m) 
+
+
+스트림의 연산 - 최종 연산
+---------
+*****
+
+* void forEach(Consumer<? super T> action) : 각 요소에 지정된 작업 수행
+* void forEachOrdered(Consumer<? super T> action) : 각 요소에 지정된 작업 수행(순서유지,병렬스트림)
+
+
+* long count() : 스트림의 요소의 개수 반환
+* Optional<T> max(Comparator<? super T> comparator) : 스트림의 최대값 반환
+* Optional<T> min(Comparator<? super T> comparator) : 스트림의 최소값 반환
+
+
+* Optional<T> findAny() : 스트림의 요소 하나를 반환(병렬 - 아무거나 하나)
+* Optional<T> findFirst() : 스트림의 요소 하나를 반환(직렬 - 첫 번째 요소)
+
+
+* boolean allMatch(Predicate<T> p) : 주이진 조건을 모든 요소가 만족시키는지 확인(모두 만족하는지)
+* boolean anyMatch(Predicate<T> p) : 주이진 조건을 모든 요소가 만족시키는지 확인(하나라도 만족하는지)
+* boolean noneMatch(Predicate<T> p) : 주이진 조건을 모든 요소가 만족시키는지 확인(모두 만족하지 않는지)
+
+
+* Object[] toArray() : 스트림의 모든 요소를 배열로 반환
+* A[] toArray(IntFunction<A[]> generator) : 스트림의 모든 요소를 배열로 반환(특정타입의 배열로 반환 가능)  
+
+  
+<reduce() & collect() -> 최종연산의 핵심>
+
+* Optional<T> reduce(BinaryOperator<T> accumulator) : 스트림의 요소를 하나씩 줄여가면서(리듀싱) 계산한다.
+* T reduce(T identity, BinaryOperator<T> accumulator)
+* U reduce(U identity, BiFunction<U,T,U> accumulator, BinaryOperator<T> combiner)
+
+
+* R collect(Collector<T,A,R> collector) : 스트림의 요소를 수집한다. 주로 요소를 그룹화하거나 분할한 결과를 컬렉션에 담아 반환하는데 사용된다.
+* R collect(Supplier<R> supplier, BiConsumer<R,T> accumulator, BiConsumer<R,R> combiner)
+
+
+
+스트림의 중간연산
+================
+
+스트림 자르기 - skip(), limit()
+-------------
+*****
+
+
+    Stream<T> skip(long n)        //앞에서부터 n개 건너뛰기
+    Stream<T> limit(long maxSize) //maxSize 이후의 요소는 잘라냄
+
+    IntStream intStream = IntStream.rangeClosed(1, 10);    //12345678910
+    intStream.skip(3).limit(5).forEach(System.out::print); //45678
+
+
+스트림의 요소 걸러내기 - filter(), distinct()
+-----------
+*****
+
+
+    Stream<T> filter(Predicate<? super T> predicate) //조건에 맞지 않는 요소 제거
+    Stream<T> distinct()                             //중복제거
+
+    IntStream intStream = IntStream.of(1,2,2,3,3,3,4,5,5,6);
+    intStream.distinct().forEach(System.out::print); //123456
+
+    IntStream intStream = IntStream.rangeClosed(1, 10);     //12345678910
+    intStream.filter(i->i%2==0).forEach(System.out::print); //246810
+
+    intStream.filter(i->%2!=0 && i%3!=0).forEach(System.out::print);
+    intStream.filter(i->%2!=0).filter(i->i%3!=0).forEach(System.out::print);
+
+
+스트림 정렬하기 - sorted()
+-----------
+*****
+
+
+    Stream<T> sorted()                    //스트림 요소의 기본 정렬(Comparable)로 정렬
+    Stream<T> sorted(Comparator<? super T> comparator) //지정된 Comparator로 정렬
+
+-------------
+
+
+    strStream.sorted()                             //기본 정렬
+    strStream.sorted(Comparator.naturalOrder())    //기본 정렬
+    strStream.sorted((s1,s2) -> s1.compareTo(s2)); //람다식도 가능
+    strStream.sorted(String::comparaTo);           //위의 문장과 동일
+    //출력 결과 = CCaaabccdd
+
+    strStream.sorted(Comparator.reverseOrder())    //기본 정렬의 역숙
+    strStream.sorted(Comparator.<String>naturalOrder().reversed())
+    //출력 결과 = ddccbaaaCC
+
+    strStream.sorted(String.CASE_INSENSITIVE_ORDER) //대소문자 구분안함
+    //출력 결과 = aaabCCccdd
+
+    strStream.sorted(String.CASE_INSENSITIVE_ORDER.reversed()) //??
+    //출력 결과 = ddCCccbaaa
+
+    strStream.sorted(Comparator.comparing(String::length)) //길이 순 정렬
+    strStream.sorted(Comparator.comparingInt(String::length)) //no 오토박싱
+    //출력 결과 = bddCCccaaa
+
+    strStream.sorted(Comparator.comparing(String::length).reversed())
+    //출력 결과 = aaaddCCccb
+
+
+Comparator의 comparing()으로 정렬 기준으로 제공
+------------
+*****
+
+
+    comparing(Function<T, U> keyExtractor)
+    comparing(Function<T, U> keyExtractor, Comparator<U> keyComparator)
+
+    studentStream.sorted(Comparator.comparing(Student::getBan)) //반별로 정렬
+                 .forEach(System.out::println);
+
+
+추가 정렬 기준을 제공할 때는 thenComparing()을 사용
+---------
+*****
+
+
+    thenComparing(Comparator<T> other)
+    thenComparing(Function<T,U> keyExtractor)
+    thenComparing(Function<T,U> keyExtractor, Comparator<U> keyComp)
+
+    studentStream.sorted(Comparator.comparing(Student::getBan) //반별로 정렬
+                 .thenComparing(Student::getTotalScore)        //총점별로 정렬
+                 .thenComparing(Student::getName)              //이름별로 정렬
+                 .forEash(System.out::println);
+                  
+
+
+
+
+
 
